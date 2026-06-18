@@ -1,0 +1,66 @@
+sezione,nome,prezzo,allergeni,fresh,desc_it,desc_en,desc_de,desc_fr
+classiche,Marinara,"6,50",9,,"Pomodoro, origano, aglio, olio extravergine d'oliva","Tomato, oregano, garlic, extra-virgin olive oil","Tomate, Oregano, Knoblauch, natives Olivenöl extra","Tomate, origan, ail, huile d'olive extra-vierge"
+classiche,Würstel,"7,00","3,9",,"Pomodoro, fiordilatte, würstel","Tomato, fiordilatte, frankfurter","Tomate, Fiordilatte, Würstchen","Tomate, fiordilatte, saucisse de Francfort"
+classiche,Funghi,"8,00","3,9",,"Pomodoro, fiordilatte, funghi champignons","Tomato, fiordilatte, champignon mushrooms","Tomate, Fiordilatte, Champignons","Tomate, fiordilatte, champignons de Paris"
+classiche,Naja,"8,50","3,9",,"Pomodoro, fiordilatte, patatine fritte","Tomato, fiordilatte, fries","Tomate, Fiordilatte, Pommes frites","Tomate, fiordilatte, frites"
+classiche,Napoli,"8,00","3,5,9",,"Pomodoro, fiordilatte, acciughe, origano","Tomato, fiordilatte, anchovies, oregano","Tomate, Fiordilatte, Sardellen, Oregano","Tomate, fiordilatte, anchois, origan"
+classiche,Prosciutto,"9,00","3,9",,"Pomodoro, fiordilatte, prosciutto cotto","Tomato, fiordilatte, cooked ham","Tomate, Fiordilatte, Kochschinken","Tomate, fiordilatte, jambon cuit"
+classiche,Diavola,"8,00","3,9",,"Pomodoro, fiordilatte, spianata piccante","Spicy spianata salami, burrata stracciatella, rocket","Scharfe Spianata-Salami, Burrata-Stracciatella, Rucola","Spianata piquante, stracciatella de burrata, roquette"
+classiche,Quattro Formaggi,"12,00","3,9",,"Pomodoro, fiordilatte, gorgonzola, taleggio, grana","Tomato, fiordilatte, gorgonzola, taleggio, grana","Tomate, Fiordilatte, Gorgonzola, Taleggio, Grana","Tomate, fiordilatte, gorgonzola, taleggio, grana"
+classiche,Quattro Stagioni,"12,00","3,9",,"Pomodoro, fiordilatte, prosciutto cotto, funghi champignons, carciofi, olive","Tomato, fiordilatte, cooked ham, champignon mushrooms, artichokes, olives","Tomate, Fiordilatte, Kochschinken, Champignons, Artischocken, Oliven","Tomate, fiordilatte, jambon cuit, champignons, artichauts, olives"
+classiche,Tonno e Cipolla,"9,50","3,5,9",,"Pomodoro, fiordilatte, tonno, cipolla di Tropea","Tomato, fiordilatte, tuna, Tropea onion","Tomate, Fiordilatte, Thunfisch, Tropea-Zwiebel","Tomate, fiordilatte, thon, oignon de Tropea"
+classiche,Boscaiola,"12,00","3,9",,"Pomodoro, fiordilatte, salsiccia, funghi porcini","Tomato, fiordilatte, sausage, porcini mushrooms","Tomate, Fiordilatte, Wurst, Steinpilze","Tomate, fiordilatte, saucisse, cèpes"
+classiche,Romana,"10,00","3,5,9",,"Pomodoro, fiordilatte, acciughe, capperi, olive, origano","Tomato, fiordilatte, anchovies, capers, olives, oregano","Tomate, Fiordilatte, Sardellen, Kapern, Oliven, Oregano","Tomate, fiordilatte, anchois, câpres, olives, origan"
+classiche,Vegetariana,"10,00","3,9",,"Pomodoro, fiordilatte, verdure di stagione","Tomato, fiordilatte, seasonal vegetables","Tomate, Fiordilatte, Saisongemüse","Tomate, fiordilatte, légumes de saison"
+classiche,Messicana,"12,00","3,9",,"Pomodoro, fiordilatte, spianata piccante, salsiccia, pancetta, peperoncino","Tomato, fiordilatte, spicy spianata salami, sausage, pancetta, chilli","Tomate, Fiordilatte, scharfe Spianata-Salami, Wurst, Pancetta, Chili","Tomate, fiordilatte, spianata piquante, saucisse, pancetta, piment"
+classiche,Affumicata,"11,00","3,9",,"Pomodoro, fiordilatte, provola affumicata, pancetta","Tomato, fiordilatte, smoked provola, pancetta","Tomate, Fiordilatte, geräucherte Provola, Pancetta","Tomate, fiordilatte, provola fumée, pancetta"
+classiche,Speck e Zola,"11,00","3,9",,"Pomodoro, fiordilatte, speck, gorgonzola","Tomato, fiordilatte, speck, gorgonzola","Tomate, Fiordilatte, Speck, Gorgonzola","Tomate, fiordilatte, speck, gorgonzola"
+speciali,Parma e Burrata,"15,00","3,9",x,"Pomodoro, fiordilatte, crudo di Parma, burrata pugliese, pepe, olio EVO","Tomato, fiordilatte, Parma cured ham, Apulian burrata, pepper, EVO oil","Tomate, Fiordilatte, Parmaschinken, apulische Burrata, Pfeffer, natives Olivenöl","Tomate, fiordilatte, jambon de Parme, burrata des Pouilles, poivre, huile d'olive"
+speciali,Parmigiana,"11,00","3,9",,"Crema di melanzane, fiordilatte, gocce di pomodoro, melanzane fritte, scaglie di Grana Padano, olio al basilico","Aubergine cream, fiordilatte, tomato drops, fried aubergine, Grana Padano shavings, basil oil","Auberginencreme, Fiordilatte, Tomatentupfen, frittierte Aubergine, Grana-Padano-Späne, Basilikumöl","Crème d'aubergine, fiordilatte, gouttes de tomate, aubergine frite, copeaux de Grana Padano, huile au basilic"
+speciali,Della Casa,"13,00","3,9",,"Speck IGP, brie, pomodoro, fiordilatte, funghi porcini trifolati","IGP speck, brie, tomato, fiordilatte, sautéed porcini mushrooms","IGP-Speck, Brie, Tomate, Fiordilatte, sautierte Steinpilze","Speck IGP, brie, tomate, fiordilatte, cèpes sautés"
+speciali,Mortazza,"14,00","2,3,9",,"Pomodoro, fiordilatte, mortadella, cuore di burrata, granella di pistacchio","Tomato, fiordilatte, mortadella, burrata heart, crushed pistachio","Tomate, Fiordilatte, Mortadella, Burrata-Herz, Pistazienkrokant","Tomate, fiordilatte, mortadelle, cœur de burrata, éclats de pistache"
+speciali,Salsiccia e Friarielli,"12,50","3,9",,"Salsiccia, pomodoro, fiordilatte, cime di rapa condite con aglio e peperoncino","Sausage, tomato, fiordilatte, turnip tops with garlic and chilli","Wurst, Tomate, Fiordilatte, Stängelkohl mit Knoblauch und Chili","Saucisse, tomate, fiordilatte, friarielli à l'ail et au piment"
+speciali,Goffee,"13,50","3,9",,"Prosciutto cotto, pomodoro, fiordilatte, gorgonzola DOP, porcini trifolati","Cooked ham, tomato, fiordilatte, DOP gorgonzola, sautéed porcini","Kochschinken, Tomate, Fiordilatte, DOP-Gorgonzola, sautierte Steinpilze","Jambon cuit, tomate, fiordilatte, gorgonzola DOP, cèpes sautés"
+speciali,Freska,"11,50","3,9",,"Pomodoro, cuore di burrata, pomodorini confit, basilico","Tomato, burrata heart, confit cherry tomatoes, basil","Tomate, Burrata-Herz, Confit-Kirschtomaten, Basilikum","Tomate, cœur de burrata, tomates cerises confites, basilic"
+speciali,Patate e Rosmarino,"8,50","3,9",,"Fiordilatte, patate al forno, rosmarino, sale e olio EVO","Fiordilatte, oven-baked potatoes, rosemary, salt and EVO oil","Fiordilatte, Ofenkartoffeln, Rosmarin, Salz und natives Olivenöl","Fiordilatte, pommes de terre au four, romarin, sel et huile d'olive"
+speciali,Bresaola e Caprino,"11,50","3,9",x,"Bresaola, caprino, pomodoro, fiordilatte, scaglie di Grana Padano","Bresaola, goat cheese, tomato, fiordilatte, Grana Padano shavings","Bresaola, Ziegenkäse, Tomate, Fiordilatte, Grana-Padano-Späne","Bresaola, fromage de chèvre, tomate, fiordilatte, copeaux de Grana Padano"
+speciali,'Nduja e Stracciatella,"12,50","3,9",,"Pomodoro, 'nduja calabrese, stracciatella di burrata","Tomato, Calabrian 'nduja, burrata stracciatella","Tomate, kalabrische 'Nduja, Burrata-Stracciatella","Tomate, 'nduja calabraise, stracciatella de burrata"
+speciali,Pomodorini e Rucola,"9,00","3,9",x,"Pomodoro, fiordilatte, pomodorino fresco rosso e rucola","Tomato, fiordilatte, fresh red cherry tomatoes and rocket","Tomate, Fiordilatte, frische rote Kirschtomaten und Rucola","Tomate, fiordilatte, tomates cerises rouges fraîches et roquette"
+speciali,Valtellinese,"12,00","3,9",x,"Bresaola, pomodoro, fiordilatte, funghi porcini trifolati","Bresaola, tomato, fiordilatte, sautéed porcini mushrooms","Bresaola, Tomate, Fiordilatte, sautierte Steinpilze","Bresaola, tomate, fiordilatte, cèpes sautés"
+speciali,Per Se,"14,00","3,5,9",,"Salsa di datterino giallo, stracciatella di burrata, acciughe, zest di limone, ""pepe"" di Sichuan","Yellow datterini sauce, burrata stracciatella, anchovies, lemon zest, Sichuan ""pepper""","Gelbe Datterini-Sauce, Burrata-Stracciatella, Sardellen, Zitronenzeste, Sichuan-„Pfeffer""","Sauce de datterini jaunes, stracciatella de burrata, anchois, zeste de citron, « poivre » de Sichuan"
+speciali,Norma,"13,00","3,9",,"Pomodoro, fiordilatte, melanzane fritte, ricotta salata grattugiata, basilico","Tomato, fiordilatte, fried aubergine, grated salted ricotta, basil","Tomate, Fiordilatte, frittierte Aubergine, geriebener Salzricotta, Basilikum","Tomate, fiordilatte, aubergine frite, ricotta salée râpée, basilic"
+margherita,Margherita Classica,"7,00","3,9",,"Pomodoro, fiordilatte, basilico fresco","Tomato, fiordilatte, fresh basil","Tomate, Fiordilatte, frisches Basilikum","Tomate, fiordilatte, basilic frais"
+margherita,Margherita DOP,"11,00","3,9",,"Pomodoro, mozzarella di bufala DOP fuori cottura, pomodorino rosso in cottura, basilico, olio EVO","Tomato, DOP buffalo mozzarella added after baking, red cherry tomato baked in, basil, EVO oil","Tomate, DOP-Büffelmozzarella nach dem Backen, rote Kirschtomate beim Backen, Basilikum, natives Olivenöl","Tomate, mozzarella de bufflonne DOP hors cuisson, tomate cerise rouge en cuisson, basilic, huile d'olive"
+margherita,Margherita Extra,"8,00","3,9",,"Pomodoro, fiordilatte, Grana Padano in cottura, basilico","Tomato, fiordilatte, Grana Padano added while baking, basil","Tomate, Fiordilatte, Grana Padano beim Backen, Basilikum","Tomate, fiordilatte, Grana Padano en cuisson, basilic"
+margherita,Pomod'oro,"12,50","3,9",,"Salsa di datterini gialli, cuore di burrata, basilico","Yellow datterini sauce, burrata heart, basil","Gelbe Datterini-Sauce, Burrata-Herz, Basilikum","Sauce de datterini jaunes, cœur de burrata, basilic"
+margherita,Margherita Confit,"10,00","3,9",,"Fiordilatte, pomodorini rossi e gialli confit, olio al basilico","Fiordilatte, red & yellow confit cherry tomatoes, basil oil","Fiordilatte, rote & gelbe Confit-Kirschtomaten, Basilikumöl","Fiordilatte, tomates cerises confites rouges et jaunes, huile au basilic"
+margherita,Margherita del Cilento,"9,00","3,9",,"Pomodoro, fiordilatte, pomodorini confit, scaglie di cacioricotta di capra del Cilento, zest di limone","Tomato, fiordilatte, confit cherry tomatoes, Cilento goat cacioricotta shavings, lemon zest","Tomate, Fiordilatte, Confit-Kirschtomaten, Cilento-Ziegen-Cacioricotta, Zitronenzeste","Tomate, fiordilatte, tomates cerises confites, copeaux de cacioricotta de chèvre du Cilento, zeste de citron"
+pala,Emilia-Romagna,"9,00","2,3,9,13",,"Stracciatella, granella di pistacchio, mortadella, aceto balsamico di Modena IGP","Stracciatella, crushed pistachio, mortadella, IGP Modena balsamic vinegar","Stracciatella, Pistazienkrokant, Mortadella, IGP-Balsamico aus Modena","Stracciatella, éclats de pistache, mortadelle, vinaigre balsamique de Modène IGP"
+pala,Come una Caprese,"9,00","3,9",,"Pomodoro a fette, mozzarella di bufala, olio al basilico","Sliced tomato, buffalo mozzarella, basil oil","Tomatenscheiben, Büffelmozzarella, Basilikumöl","Tomate en tranches, mozzarella de bufflonne, huile au basilic"
+pala,Delicato,"8,50","3,9",,"Stracciatella di burrata, prosciutto cotto, rucola, pomodorini confit","Burrata stracciatella, cooked ham, rocket, confit cherry tomatoes","Burrata-Stracciatella, Kochschinken, Rucola, Confit-Kirschtomaten","Stracciatella de burrata, jambon cuit, roquette, tomates cerises confites"
+pala,Diavola,"8,00","3,9",,"Spianata piccante, stracciatella di burrata, rucola","Spicy spianata salami, burrata stracciatella, rocket","Scharfe Spianata-Salami, Burrata-Stracciatella, Rucola","Spianata piquante, stracciatella de burrata, roquette"
+pala,Crudo e Mozzarella,"9,00","3,9",,"Prosciutto crudo di Parma, fiordilatte, rucola, pomodori confit e olio EVO","Parma cured ham, fiordilatte, rocket, confit tomatoes and EVO oil","Parmaschinken, Fiordilatte, Rucola, Confit-Tomaten und natives Olivenöl","Jambon cru de Parme, fiordilatte, roquette, tomates confites et huile d'olive"
+pala,Nocciolata,"7,00","2,9",,"Nocciole tostate, crema di nocciole e zucchero a velo","Toasted hazelnuts, hazelnut cream and icing sugar","Geröstete Haselnüsse, Haselnusscreme und Puderzucker","Noisettes torréfiées, crème de noisette et sucre glace"
+bibite,Acqua naturale / gassata,"1,50",,,,Still / sparkling water,Wasser still / mit Kohlensäure,Eau plate / pétillante
+bibite,Coca-Cola,"2,50",,,,,,
+bibite,Coca-Cola classica (vetro),"3,00",,,,,,
+bibite,Coca-Cola Zero (vetro),"3,00",,,,,,
+bibite,Fanta,"2,50",,,,,,
+bibite,Sprite,"2,50",,,,,,
+bibite,Fuzetea Pesca,"2,50",,,,,,
+bibite,Fuzetea Limone,"2,50",,,,,,
+bibite,Lurisia Limonata,"3,50",,,,,,
+bibite,Lurisia Aranciata,"3,50",,,,,,
+bibite,Lurisia Gazzosa,"3,50",,,,,,
+bibite,Lurisia Chinotto,"3,50",,,,,,
+birre_std,Moretti 33cl,"3,00",9,,,,,
+birre_std,Moretti 66cl,"4,00",9,,,,,
+birre_std,Moretti FAF 33cl,"4,00",9,,,,,
+birre_std,Messina Vivace 33cl,"4,00",9,,,,,
+birre_std,Ichnusa 33cl,"4,00",9,,,,,
+birre_std,Fisher 65cl,"5,00",9,,,,,
+birre_std,Heineken analcolica 33cl,"4,00",9,,,,,
+birre_craft,Jack IPA 33cl,"4,50",9,,,,,
+birre_craft,Spiga di Legno 33cl,"4,50",9,,,,,
+birre_craft,Milf Passion 33cl,"4,50",9,,,,,
+birre_craft,Testa di Malto 33cl,"4,50",9,,,,,

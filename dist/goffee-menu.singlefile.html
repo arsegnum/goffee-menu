@@ -231,6 +231,10 @@
   /* ----------------------------- CONFIG ----------------------------------- */
   var CONFIG = {
     mount: "#goffee-menu-root",      // contenitore in cui montare il menù
+    // URL CSV del Foglio Google pubblicato (File → Condividi → Pubblica sul web → CSV).
+    // Lasciato vuoto: usa i dati interni qui sotto. Quando lo imposti, il menù legge
+    // pizze/bevande dal foglio (con i dati interni come riserva se il foglio non risponde).
+    sheetCsvUrl: "",
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
@@ -747,6 +751,75 @@
     });
   }
 
+  /* --------------------- FOGLIO GOOGLE (opzionale) ------------------------ */
+  // Parser CSV minimale ma robusto: gestisce campi tra virgolette, virgole e
+  // a capo interni, e virgolette doppie raddoppiate ("").
+  function parseCSV(text) {
+    text = String(text).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    var rows = [], row = [], field = "", inQ = false, i, c;
+    for (i = 0; i < text.length; i++) {
+      c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+        else field += c;
+      } else if (c === '"') { inQ = true; }
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+      else field += c;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    var headers = (rows.shift() || []).map(function (h) { return h.trim().toLowerCase(); });
+    return rows
+      .filter(function (r) { return r.some(function (x) { return x.trim() !== ""; }); })
+      .map(function (r) {
+        var o = {};
+        headers.forEach(function (h, idx) { o[h] = r[idx] !== undefined ? r[idx] : ""; });
+        return o;
+      });
+  }
+
+  // Trasforma le righe del foglio nella struttura MENU + traduzioni I18N.
+  // Una sezione viene sostituita solo se nel foglio ha almeno una riga, così un
+  // foglio incompleto non svuota mai il menù.
+  function applySheet(rows) {
+    var buckets = { classiche: [], speciali: [], margherita: [], pala: [], bibite: [], birre_std: [], birre_craft: [] };
+    rows.forEach(function (r) {
+      var s = (r.sezione || "").trim().toLowerCase();
+      var nome = (r.nome || "").trim();
+      if (!nome || !buckets[s]) return;
+      var all = (r.allergeni || "").split(/[^0-9]+/).filter(Boolean).map(Number);
+      var item = { n: nome, p: (r.prezzo || "").trim() };
+      if (all.length) item.a = all;
+      var dit = (r.desc_it || "").trim();
+      if (dit) item.d = dit;
+      if ((r.fresh || "").trim()) item.fresh = true;
+      // traduzioni descrizione → I18N.desc (così desc() le usa come sempre)
+      var tr = {};
+      ["en", "de", "fr"].forEach(function (l) {
+        var v = (r["desc_" + l] || "").trim();
+        if (v) tr[l] = v;
+      });
+      if (Object.keys(tr).length) {
+        I18N.desc[nome] = Object.assign({}, I18N.desc[nome], tr);
+      }
+      buckets[s].push(item);
+    });
+    MENU.sezioni.forEach(function (sec) {
+      if (buckets[sec.id] && buckets[sec.id].length) sec.items = buckets[sec.id];
+    });
+    if (buckets.bibite.length) MENU.bibite.bibite = buckets.bibite;
+    if (buckets.birre_std.length) MENU.bibite.birreStd.items = buckets.birre_std;
+    if (buckets.birre_craft.length) MENU.bibite.birre.items = buckets.birre_craft;
+  }
+
+  function loadSheet() {
+    if (!CONFIG.sheetCsvUrl) return;
+    fetch(CONFIG.sheetCsvUrl, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(function (txt) { applySheet(parseCSV(txt)); render(); })
+      .catch(function (e) { console.warn("[Goffee] Foglio non caricato, uso i dati interni:", e); });
+  }
+
   /* ------------------------------ INIT ------------------------------------ */
   function init() {
     root = document.querySelector(CONFIG.mount);
@@ -757,7 +830,8 @@
     root.classList.add("goffee-menu");
     currentLang = readLang();
     document.documentElement.lang = currentLang;
-    render();
+    render();        // mostra subito i dati interni (nessuna attesa / nessun vuoto)
+    loadSheet();     // se configurato, aggiorna dal Foglio Google e ri-renderizza
   }
 
   if (document.readyState === "loading") {
@@ -766,8 +840,12 @@
     init();
   }
 
-  // esposto per eventuale personalizzazione da Webflow prima del mount
-  window.GoffeeMenu = { config: CONFIG, render: function () { if (root) render(); } };
+  // esposto per personalizzazione/debug
+  window.GoffeeMenu = {
+    config: CONFIG, MENU: MENU, I18N: I18N,
+    render: function () { if (root) render(); },
+    parseCSV: parseCSV, applySheet: applySheet, loadSheet: loadSheet
+  };
 })();
 
 </script>
