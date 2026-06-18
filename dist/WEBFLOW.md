@@ -37,6 +37,23 @@ I testi delle pizze, le traduzioni, i prezzi e gli allergeni sono nello stesso f
 
 ---
 
+## ✅ Hosting già pronto
+
+I file sono già pubblicati su GitHub (`arsegnum/goffee-menu`) e serviti via jsDelivr.
+Non devi caricare nulla: ti basta incollare lo snippet qui sotto in Webflow.
+
+Snippet da incollare in un elemento **Embed** della pagina:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-menu.css">
+<div id="goffee-menu-root"></div>
+<script src="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-menu.js"></script>
+```
+
+Per aggiornare il menù in futuro: si modifica `dist/goffee-menu.js`, si fa commit/push,
+e jsDelivr propaga il nuovo file (la cache di `@main` si aggiorna entro ~12h; per forzarla
+subito si apre una volta `https://purge.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-menu.js`).
+
 ## Come integrarlo in Webflow
 
 Ci sono tre strade. **Consiglio la A** (più affidabile e veloce da aggiornare).
