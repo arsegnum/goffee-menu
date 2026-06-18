@@ -16,7 +16,7 @@
     // URL CSV del Foglio Google pubblicato (File → Condividi → Pubblica sul web → CSV).
     // Lasciato vuoto: usa i dati interni qui sotto. Quando lo imposti, il menù legge
     // pizze/bevande dal foglio (con i dati interni come riserva se il foglio non risponde).
-    sheetCsvUrl: "",
+    sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThNwBuz4gscLhPB419NcA7kD7_Av_03YRx-UC23z0yadYu_K2dSZ86q7izFLE9EskY6sFm07XBzQRU/pub?gid=1000921760&single=true&output=csv",
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
