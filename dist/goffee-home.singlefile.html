@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Goffee — Pizzeria artigianale · Dervio, Lago di Como</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}body{margin:0;}
+/* Goffee — Home · versione production self-contained (vanilla, 0 dipendenze).
+   Tutto lo stile è "isolato" sotto .goffee-home per non toccare il resto del sito Webflow. */
+.goffee-home{
+  --white:#FFFFFF;
+  --ice:#FAFAFA;
+  --ink:#1D1D1F;
+  --muted:#6E6E73;
+  --line:#ECECEC;
+  --accent:#D6452B;
+  --font:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --pad:clamp(22px, 6vw, 64px);
+  --maxw:1120px;
+  background:var(--white);color:var(--ink);
+  font-family:var(--font);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.01em;
+}
+.goffee-home *{box-sizing:border-box;}
+.goffee-home img{max-width:100%;display:block;}
+.goffee-home section[id]{scroll-margin-top:84px;}
+
+/* ============ NAVBAR ============ */
+.goffee-home .gnav{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb, var(--white) 82%, transparent);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease;
+}
+.goffee-home .gnav[data-scrolled="true"]{border-bottom-color:var(--line);}
+.goffee-home .gnav__bar{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:24px;padding:0 var(--pad);height:64px;}
+.goffee-home .gnav__brand{flex:none;display:flex;align-items:center;text-decoration:none;}
+.goffee-home .gnav__brand img{height:32px;width:auto;}
+.goffee-home .gnav__links{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:36px;}
+.goffee-home .gnav__link{text-decoration:none;white-space:nowrap;position:relative;font-size:.96rem;font-weight:400;color:var(--muted);letter-spacing:-.01em;padding:6px 0;transition:color .2s ease;}
+.goffee-home .gnav__link:hover{color:var(--ink);}
+.goffee-home .gnav__link--active{color:var(--ink);font-weight:500;}
+.goffee-home .gnav__link::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transform-origin:center;transition:transform .26s cubic-bezier(.2,.7,.3,1);}
+.goffee-home .gnav__link:hover::after{transform:scaleX(.55);}
+.goffee-home .gnav__link--active::after{transform:scaleX(1);}
+.goffee-home .gnav__actions{flex:none;display:flex;align-items:center;gap:16px;}
+.goffee-home .gnav__toggle{display:none;flex:none;appearance:none;background:none;border:none;cursor:pointer;width:42px;height:42px;border-radius:11px;align-items:center;justify-content:center;color:var(--ink);}
+.goffee-home .gnav__toggle:hover{background:color-mix(in srgb, var(--ink) 6%, transparent);}
+.goffee-home .gnav__toggle svg{display:block;}
+
+/* CTA pill */
+.goffee-home .btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--accent);color:#fff;text-decoration:none;
+  font-family:var(--font);font-weight:500;font-size:.97rem;letter-spacing:-.005em;
+  padding:12px 22px;border-radius:980px;border:none;cursor:pointer;white-space:nowrap;
+  transition:filter .18s ease, transform .18s cubic-bezier(.2,.7,.3,1);
+}
+.goffee-home .btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.goffee-home .btn:active{transform:translateY(0);}
+.goffee-home .btn svg{display:block;}
+.goffee-home .btn--lg{padding:15px 30px;font-size:1.03rem;}
+.goffee-home .btn--ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+.goffee-home .btn--ghost:hover{filter:none;border-color:var(--ink);}
+
+/* ============ HERO (minimal, centrato) ============ */
+.goffee-home .hero{max-width:var(--maxw);margin:0 auto;padding:clamp(36px,5vw,68px) var(--pad) clamp(40px,6vw,72px);text-align:center;}
+.goffee-home .hero__copy{text-align:center;}
+.goffee-home .hero__title{font-weight:700;letter-spacing:-.04em;line-height:1.0;font-size:clamp(2.7rem,6.6vw,5rem);margin:0 auto .34em;color:var(--ink);max-width:15ch;text-wrap:balance;}
+.goffee-home .hero__title em{font-style:normal;color:var(--accent);}
+.goffee-home .hero__sub{color:var(--muted);font-size:clamp(1.12rem,1.8vw,1.4rem);line-height:1.5;max-width:46ch;margin:0 auto 1.7em;font-weight:400;text-wrap:pretty;}
+.goffee-home .hero__cta{display:flex;flex-wrap:wrap;gap:13px;align-items:center;justify-content:center;}
+.goffee-home .hero__chips{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;margin-top:clamp(22px,3vw,32px);}
+.goffee-home .chip{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:.95rem;letter-spacing:-.005em;}
+.goffee-home .chip svg{flex:none;color:var(--accent);}
+.goffee-home .chip b{color:var(--ink);font-weight:600;}
+/* pizza */
+.goffee-home .hero__media{margin-top:clamp(8px,1.5vw,20px);}
+.goffee-home .hero__pizza{position:relative;width:min(92vw,640px);margin:0 auto;}
+.goffee-home .hero__pizza img{width:100%;height:auto;animation:goffeeFloaty 7s ease-in-out infinite;}
+.goffee-home .hero__pizza::after{content:"";position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:58%;height:34px;
+  background:radial-gradient(ellipse, rgba(40,20,10,.18) 0%, transparent 70%);filter:blur(7px);z-index:-1;
+  animation:goffeeShadowy 7s ease-in-out infinite;}
+@keyframes goffeeFloaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+@keyframes goffeeShadowy{0%,100%{transform:translateX(-50%) scale(1);opacity:.9;}50%{transform:translateX(-50%) scale(.9);opacity:.6;}}
+@media(prefers-reduced-motion:reduce){.goffee-home .hero__pizza img,.goffee-home .hero__pizza::after{animation:none;}}
+@media(max-width:640px){.goffee-home .hero__pizza{width:min(86vw,440px);}}
+
+/* ============ MENU TEASER ============ */
+.goffee-home .sec{max-width:var(--maxw);margin:0 auto;padding:clamp(60px,9vw,116px) var(--pad);border-top:1px solid var(--line);}
+.goffee-home .menu-head{text-align:center;max-width:52ch;margin:0 auto clamp(38px,5vw,56px);}
+.goffee-home .kicker{display:block;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.goffee-home .sec__title{font-weight:700;font-size:clamp(2rem,4.6vw,3rem);line-height:1.06;margin:0 0 .5em;letter-spacing:-.032em;color:var(--ink);text-wrap:balance;}
+.goffee-home .sec__lead{color:var(--muted);font-size:1.08rem;line-height:1.55;margin:0;}
+.goffee-home .pizza-list{max-width:760px;margin:0 auto;}
+.goffee-home .prow{display:flex;align-items:baseline;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);}
+.goffee-home .prow:first-child{border-top:1px solid var(--line);}
+.goffee-home .prow__name{font-weight:600;font-size:1.16rem;letter-spacing:-.02em;color:var(--ink);flex:none;}
+.goffee-home .prow__desc{color:var(--muted);font-size:.96rem;flex:1;min-width:0;letter-spacing:-.005em;}
+.goffee-home .prow__price{color:var(--accent);font-weight:600;font-size:1.08rem;font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap;flex:none;}
+@media(max-width:560px){
+  .goffee-home .prow{flex-wrap:wrap;gap:4px 14px;}
+  .goffee-home .prow__desc{flex-basis:100%;order:3;}
+}
+.goffee-home .menu-foot{display:flex;justify-content:center;margin-top:clamp(36px,4vw,52px);}
+
+/* ============ CTA / CONTATTI ============ */
+.goffee-home .cta{background:var(--ink);color:#fff;}
+.goffee-home .cta__in{max-width:var(--maxw);margin:0 auto;padding:clamp(58px,8vw,100px) var(--pad);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,80px);align-items:center;}
+.goffee-home .cta__title{font-weight:700;font-size:clamp(2.3rem,5vw,3.4rem);line-height:1.02;letter-spacing:-.035em;margin:0 0 .5em;color:#fff;text-wrap:balance;}
+.goffee-home .cta__addr{color:rgba(255,255,255,.7);font-size:1.1rem;margin:0 0 1.7em;letter-spacing:-.01em;}
+.goffee-home .cta__hours{display:flex;flex-wrap:wrap;gap:16px 46px;margin-bottom:2.1em;}
+.goffee-home .cta__hours div{display:flex;flex-direction:column;gap:4px;}
+.goffee-home .cta__hours span{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.goffee-home .cta__hours b{font-size:1.05rem;color:#fff;font-weight:600;letter-spacing:-.01em;}
+.goffee-home .cta__buttons{display:flex;flex-wrap:wrap;gap:13px;}
+.goffee-home .cta__buttons .btn--ghost{color:#fff;border-color:rgba(255,255,255,.4);}
+.goffee-home .cta__buttons .btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+.goffee-home .cta__phone{justify-self:end;text-align:right;}
+.goffee-home .cta__phone span{display:block;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px;}
+.goffee-home .cta__phone a{font-size:clamp(2rem,4.2vw,3rem);font-weight:700;letter-spacing:-.035em;color:#fff;text-decoration:none;}
+.goffee-home .cta__phone a:hover{opacity:.9;}
+@media(max-width:840px){.goffee-home .cta__in{grid-template-columns:1fr;gap:34px;}.goffee-home .cta__phone{justify-self:start;text-align:left;}}
+
+/* ============ FOOTER (uguale alla pagina menù) ============ */
+.goffee-home .foot{background:var(--ice);border-top:1px solid var(--line);}
+.goffee-home .foot__in{max-width:var(--maxw);margin:0 auto;padding:clamp(56px,9vw,104px) var(--pad) 0;text-align:center;}
+.goffee-home .foot-eyebrow{display:block;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+.goffee-home .foot-title{font-weight:700;font-size:clamp(2.4rem,7vw,3.8rem);margin:0 0 .3em;color:var(--ink);letter-spacing:-.035em;line-height:1;}
+.goffee-home .foot-addr{color:var(--muted);margin:0 0 2.2em;font-size:1.08rem;letter-spacing:-.01em;}
+.goffee-home .foot-hours{display:flex;flex-wrap:wrap;justify-content:center;gap:20px 52px;margin-bottom:2.6em;}
+.goffee-home .foot-hours div{display:flex;flex-direction:column;gap:5px;}
+.goffee-home .foot-hours span{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.goffee-home .foot-hours b{font-size:1.08rem;color:var(--ink);font-weight:600;letter-spacing:-.01em;}
+.goffee-home .foot-cta{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;}
+.goffee-home .foot-legal{max-width:var(--maxw);margin:clamp(40px,5vw,60px) auto 0;padding:clamp(24px,3vw,30px) var(--pad) clamp(40px,6vw,64px);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;text-align:left;}
+.goffee-home .foot-legal small{color:var(--muted);font-size:.84rem;}
+.goffee-home .foot-social{display:flex;gap:10px;}
+.goffee-home .foot-social a{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:border-color .2s ease, color .2s ease;}
+.goffee-home .foot-social a:hover{border-color:var(--accent);color:var(--accent);}
+.goffee-home .foot-social svg{display:block;}
+@media(max-width:560px){.goffee-home .foot-legal{justify-content:center;text-align:center;}}
+
+/* ============ MOBILE NAV ============ */
+@media(max-width:820px){
+  .goffee-home .gnav__bar{gap:14px;height:64px;}
+  .goffee-home .gnav__links{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2px;background:var(--white);border-bottom:1px solid var(--line);padding:12px var(--pad) 20px;box-shadow:0 22px 44px -26px rgba(0,0,0,.34);display:none;text-align:left;}
+  .goffee-home .gnav[data-open="true"] .gnav__links{display:flex;}
+  .goffee-home .gnav__link{font-size:1.12rem;font-weight:500;color:var(--ink);padding:14px 6px;border-radius:11px;}
+  .goffee-home .gnav__link::after{display:none;}
+  .goffee-home .gnav__link--active{color:var(--accent);}
+  .goffee-home .gnav__links .btn{margin-top:12px;padding:15px 22px;font-size:1.02rem;}
+  .goffee-home .gnav__actions .btn{display:none;}
+  .goffee-home .gnav__toggle{display:flex;}
+  .goffee-home .gnav__actions{margin-left:auto;}
+}
+.goffee-home .gnav__links .btn{display:none;}
+@media(max-width:820px){.goffee-home .gnav__links .btn{display:inline-flex;}}
+
+/* reveal on scroll */
+@media(prefers-reduced-motion:no-preference){
+  .goffee-home .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);}
+  .goffee-home .reveal.in{opacity:1;transform:none;}
+}
+</content>
+</style>
+</head>
+<body>
+<div id="goffee-home-root"></div>
+<script>
+/* ============================================================================
+   Goffee — Home · versione production self-contained (vanilla JS, 0 dipendenze)
+   Ricostruisce fedelmente "Home Goffee.html": navbar + hero (foto pizza) +
+   anteprima menù + footer. Si monta in un contenitore #goffee-home-root.
+
+   PERSONALIZZA solo il blocco CONFIG qui sotto (telefono, link al menù, immagini).
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var CONFIG = {
+    mount: "#goffee-home-root",
+    tel: "0341 851178",
+    // Indirizzo della pagina Menù sul tuo sito Webflow. Lasciato sul valore attuale:
+    // aggiornalo se rinomini la pagina (es. "/menu").
+    menuUrl: "/untitled",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v2/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v2/dist/pizza-top.jpg",
+    address: "Via Martiri della Liberazione 20 · Dervio (LC)",
+    mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
+    hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
+    legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
+    instagram: "#",
+    facebook: "#"
+  };
+
+  var ICON = {
+    phone: '<svg width="{S}" height="{S}" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3.5c.5 0 .9.3 1.1.8l1 2.6c.2.5.1 1-.3 1.4l-1.1 1c-.2.2-.3.5-.1.8a11 11 0 0 0 4.5 4.5c.3.2.6.1.8-.1l1-1.1c.4-.4.9-.5 1.4-.3l2.6 1c.5.2.8.6.8 1.1v2.6c0 .8-.7 1.5-1.5 1.4C9.2 19.9 4.1 14.8 3.5 6.6 3.4 5.8 4.1 5 4.9 5h1.6Z" fill="currentColor"/></svg>',
+    burger: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    truck: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7" cy="17" r="1.7" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="17" r="1.7" stroke="currentColor" stroke-width="1.7"/></svg>',
+    pin: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 2.5c-3.9 0-7 3.1-7 7 0 5 7 12 7 12s7-7 7-12c0-3.9-3.1-7-7-7Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.3" fill="currentColor"/></svg>',
+    leaf: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 22V11M12 11c0-3 1.5-5 4.5-6-.3 3-1.8 5-4.5 6Zm0 0C12 8 10.5 6 7.5 5c.3 3 1.8 5 4.5 6Zm0 4c0-2.5 1.3-4 4-5-.3 2.5-1.6 4-4 5Zm0 0c0-2.5-1.3-4-4-5 .3 2.5 1.6 4 4 5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    arrow: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    instagram: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>',
+    facebook: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5.5H14c-2 0-3.5 1.5-3.5 3.5v2H8v3h2.5V21h3v-7H16l.5-3h-3V9.2c0-.4.3-.7.7-.7Z" fill="currentColor"/></svg>'
+  };
+
+  // Anteprima menù: 5 proposte in evidenza (modificabili qui).
+  var TEASER = [
+    { n: "Margherita", d: "Pomodoro, fiordilatte, basilico fresco", p: "7,00 €" },
+    { n: "Diavola", d: "Pomodoro, fiordilatte, spianata piccante", p: "8,00 €" },
+    { n: "Goffee", d: "Cotto, gorgonzola DOP, porcini trifolati", p: "13,50 €" },
+    { n: "Parma e Burrata", d: "Crudo di Parma, burrata pugliese, pepe, olio EVO", p: "15,00 €" },
+    { n: "Mortazza", d: "Mortadella, cuore di burrata, granella di pistacchio", p: "14,00 €" }
+  ];
+
+  function telHref() { return "tel:" + CONFIG.tel.replace(/\s/g, ""); }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function navbar() {
+    return '' +
+      '<header class="gnav" aria-label="Navigazione sito">' +
+      '<nav class="gnav__bar">' +
+      '<a class="gnav__brand" href="#top" aria-label="Goffee Pizzeria — home"><img src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria"></a>' +
+      '<div class="gnav__links">' +
+      '<a class="gnav__link gnav__link--active" href="#top">Home</a>' +
+      '<a class="gnav__link" href="' + esc(CONFIG.menuUrl) + '">Menù</a>' +
+      '<a class="gnav__link" href="#contatti">Dove siamo</a>' +
+      '<a class="btn" href="' + telHref() + '">Ordina ora</a>' +
+      '</div>' +
+      '<div class="gnav__actions">' +
+      '<a class="btn" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 17) + ' Ordina ora</a>' +
+      '<button class="gnav__toggle" type="button" aria-label="Apri menù" aria-expanded="false">' + ICON.burger + '</button>' +
+      '</div>' +
+      '</nav></header>';
+  }
+
+  function hero() {
+    return '' +
+      '<section class="hero" id="top">' +
+      '<div class="hero__copy reveal">' +
+      '<h1 class="hero__title">La pizza che <em>conquista</em> la tua tavola.</h1>' +
+      '<p class="hero__sub">Niente fretta, solo lievito e tempo.</p>' +
+      '<div class="hero__cta">' +
+      '<a class="btn btn--lg" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Ordina ora — ' + esc(CONFIG.tel) + '</a>' +
+      '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.menuUrl) + '">Vedi il menù</a>' +
+      '</div>' +
+      '<div class="hero__chips">' +
+      '<span class="chip">' + ICON.truck + 'Consegna <b>a domicilio</b></span>' +
+      '<span class="chip">' + ICON.pin + 'Dervio · <b>Lago di Como</b></span>' +
+      '<span class="chip">' + ICON.leaf + 'Fatto con <b>❤️</b> e tanta farina</span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="hero__media reveal"><div class="hero__pizza">' +
+      '<img src="' + esc(CONFIG.pizzaSrc) + '" alt="Pizza margherita artigianale Goffee vista dall\'alto"></div></div>' +
+      '</section>';
+  }
+
+  function teaser() {
+    var rows = TEASER.map(function (r) {
+      return '<div class="prow"><span class="prow__name">' + esc(r.n) + '</span>' +
+        '<span class="prow__desc">' + esc(r.d) + '</span>' +
+        '<span class="prow__price">' + esc(r.p) + '</span></div>';
+    }).join("");
+    return '' +
+      '<section class="sec" id="menu">' +
+      '<div class="menu-head reveal">' +
+      '<span class="kicker">Dal nostro forno</span>' +
+      '<h2 class="sec__title">Qualche idea dal menù</h2>' +
+      '<p class="sec__lead">Dalle classiche di sempre alle Creazioni gourmet. Il menù completo è molto più ricco.</p>' +
+      '</div>' +
+      '<div class="pizza-list reveal">' + rows + '</div>' +
+      '<div class="menu-foot reveal"><a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.menuUrl) + '">Vedi tutto il menù ' + ICON.arrow + '</a></div>' +
+      '</section>';
+  }
+
+  function footer() {
+    return '' +
+      '<footer class="foot" id="contatti">' +
+      '<div class="foot__in reveal">' +
+      '<span class="foot-eyebrow">Goffee · Pizzeria</span>' +
+      '<h2 class="foot-title">Ti aspettiamo a Dervio</h2>' +
+      '<p class="foot-addr">' + esc(CONFIG.address) + '</p>' +
+      '<div class="foot-hours">' +
+      '<div><span>Pranzo</span><b>' + esc(CONFIG.hours.lunch) + '</b></div>' +
+      '<div><span>Cena</span><b>' + esc(CONFIG.hours.dinner) + '</b></div>' +
+      '<div><span>Riposo</span><b>' + esc(CONFIG.hours.closed) + '</b></div>' +
+      '</div>' +
+      '<div class="foot-cta">' +
+      '<a class="btn btn--lg" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama per ordinare</a>' +
+      '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
+      '</div></div>' +
+      '<div class="foot-legal">' +
+      '<small>' + esc(CONFIG.legal) + '</small>' +
+      '<div class="foot-social">' +
+      '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + ICON.instagram + '</a>' +
+      '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + ICON.facebook + '</a>' +
+      '</div></div></footer>';
+  }
+
+  function wire(root) {
+    var nav = root.querySelector(".gnav");
+    var toggle = root.querySelector(".gnav__toggle");
+    var links = root.querySelector(".gnav__links");
+    if (!nav) return;
+
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          nav.setAttribute("data-scrolled", String(window.scrollY > 8));
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        var open = nav.getAttribute("data-open") === "true";
+        nav.setAttribute("data-open", String(!open));
+        toggle.setAttribute("aria-expanded", String(!open));
+        toggle.setAttribute("aria-label", open ? "Apri menù" : "Chiudi menù");
+      });
+    }
+    if (links) {
+      links.addEventListener("click", function (e) {
+        if (e.target.closest("a")) {
+          nav.setAttribute("data-open", "false");
+          if (toggle) toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    root.querySelectorAll(".reveal").forEach(function (el, i) {
+      el.style.transitionDelay = (Math.min(i % 5, 4) * 55) + "ms";
+      io.observe(el);
+    });
+  }
+
+  function init() {
+    var root = document.querySelector(CONFIG.mount);
+    if (!root) { console.error("[Goffee Home] contenitore non trovato:", CONFIG.mount); return; }
+    root.classList.add("goffee-home");
+    root.innerHTML = navbar() + hero() + teaser() + footer();
+    wire(root);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  window.GoffeeHome = { config: CONFIG, teaser: TEASER };
+})();
+
+</script>
+</body>
+</html>
