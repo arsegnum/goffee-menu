@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -424,7 +424,7 @@
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '">Home</a>' +
       '<a class="snav__link snav__link--active" href="#top">Menù</a>' +
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '#contatti">Dove siamo</a>' +
-      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 16) + 'Ordina ora</a>' +
+      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 17) + 'Ordina ora</a>' +
       '</div></nav></header>';
   }
 

@@ -41,12 +41,12 @@
 .goffee-menu .snav__bar{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:24px;padding:0 var(--pad);height:64px;}
 .goffee-menu .snav__brand{flex:none;display:flex;align-items:center;text-decoration:none;}
 .goffee-menu .snav__brand img{height:32px;width:auto;display:block;}
-.goffee-menu .snav__links{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:34px;}
+.goffee-menu .snav__links{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:36px;}
 .goffee-menu .snav__link{text-decoration:none;white-space:nowrap;position:relative;font-size:.96rem;font-weight:400;color:var(--muted);letter-spacing:-.01em;padding:6px 0;transition:color .2s ease;}
 .goffee-menu .snav__link:hover{color:var(--ink);}
 .goffee-menu .snav__link--active{color:var(--ink);font-weight:500;}
 .goffee-menu .snav__link--active::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;border-radius:2px;background:var(--accent);}
-.goffee-menu .snav__cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:-.005em;padding:10px 20px;border-radius:980px;white-space:nowrap;transition:filter .18s ease, transform .18s cubic-bezier(.2,.7,.3,1);}
+.goffee-menu .snav__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;text-decoration:none;font-weight:500;font-size:.97rem;letter-spacing:-.005em;padding:12px 22px;border-radius:980px;white-space:nowrap;transition:filter .18s ease, transform .18s cubic-bezier(.2,.7,.3,1);}
 .goffee-menu .snav__cta:hover{filter:brightness(1.06);transform:translateY(-1px);}
 .goffee-menu .snav__cta svg{display:block;}
 @media(max-width:680px){
@@ -276,7 +276,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -680,7 +680,7 @@
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '">Home</a>' +
       '<a class="snav__link snav__link--active" href="#top">Menù</a>' +
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '#contatti">Dove siamo</a>' +
-      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 16) + 'Ordina ora</a>' +
+      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 17) + 'Ordina ora</a>' +
       '</div></nav></header>';
   }
 
