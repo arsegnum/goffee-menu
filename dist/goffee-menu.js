@@ -18,14 +18,19 @@
     // pizze/bevande dal foglio (con i dati interni come riserva se il foglio non risponde).
     sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThNwBuz4gscLhPB419NcA7kD7_Av_03YRx-UC23z0yadYu_K2dSZ86q7izFLE9EskY6sFm07XBzQRU/pub?gid=1000921760&single=true&output=csv",
     tel: "0341 851178",              // telefono mostrato e usato per tel:
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@main/dist/goffee-logo.png",
+    // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
+    homeUrl: "/",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v3/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
     hero: "centrato",                // centrato | sfondo | foto
     accent: "#D6452B",
     heroBg: "hero-pizza.jpg",        // usato solo se hero === "sfondo"
-    storageKey: "goffee-lang"
+    storageKey: "goffee-lang",
+    legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
+    instagram: "#",
+    facebook: "#"
   };
 
   /* ------------------------------ DATI ------------------------------------ */
@@ -298,6 +303,17 @@
 
   /* --------------------------- HELPERS ------------------------------------ */
   var NAV_IDS = ["classiche", "speciali", "margherita", "pala", "bibite"];
+  var LANG_NAMES = { it: "Italiano", en: "English", de: "Deutsch", fr: "Français" };
+  var LANG_LABEL = { it: "Lingua", en: "Language", de: "Sprache", fr: "Langue" };
+
+  var GLOBE_SVG =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+    '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" stroke="currentColor" stroke-width="2"/></svg>';
+  var IG_SVG =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>';
+  var FB_SVG =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5.5H14c-2 0-3.5 1.5-3.5 3.5v2H8v3h2.5V21h3v-7H16l.5-3h-3V9.2c0-.4.3-.7.7-.7Z" fill="currentColor"/></svg>';
 
   function esc(s) {
     return String(s)
@@ -399,21 +415,36 @@
       callButton(ui, true) + '</div>' + photo + '</div></header>';
   }
 
-  function nav(active, lang, ui) {
-    var links = NAV_IDS.map(function (id) {
-      return '<a href="#' + id + '" class="nav-link' + (active === id ? " nav-link--active" : "") +
-        '">' + esc(ui.nav[id]) + '</a>';
+  // Navbar di sito (coerente con la home): Home / Menù / Dove siamo / Ordina ora
+  function snav() {
+    var tel = "tel:" + CONFIG.tel.replace(/\s/g, "");
+    return '<header class="snav"><nav class="snav__bar" aria-label="Navigazione sito">' +
+      '<a class="snav__brand" href="' + esc(CONFIG.homeUrl) + '" aria-label="Goffee Pizzeria — home"><img src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria"></a>' +
+      '<div class="snav__links">' +
+      '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '">Home</a>' +
+      '<a class="snav__link snav__link--active" href="#top">Menù</a>' +
+      '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '#contatti">Dove siamo</a>' +
+      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 16) + 'Ordina ora</a>' +
+      '</div></nav></header>';
+  }
+
+  // Pulsante lingua flottante (in basso a destra): globo + lingua, con elenco a comparsa.
+  function fnav(lang) {
+    var label = LANG_LABEL[lang] || "Lingua";
+    var currentPair = I18N.langs.filter(function (p) { return p[0] === lang; })[0] || I18N.langs[0];
+    var current = currentPair[1];
+    var items = I18N.langs.map(function (pair) {
+      var code = pair[0];
+      return '<button type="button" class="fnav-item' + (lang === code ? " fnav-item--active" : "") +
+        '" data-lang="' + code + '" aria-pressed="' + (lang === code) + '">' + esc(LANG_NAMES[code]) + '</button>';
     }).join("");
-    var langs = I18N.langs.map(function (pair, i) {
-      var code = pair[0], label = pair[1];
-      return (i > 0 ? '<span class="lang-sep" aria-hidden="true">·</span>' : "") +
-        '<button type="button" class="lang-btn' + (lang === code ? " lang-btn--active" : "") +
-        '" data-lang="' + code + '" aria-pressed="' + (lang === code) + '">' + esc(label) + '</button>';
-    }).join("");
-    return '<nav class="nav" aria-label="Menù">' +
-      '<a class="nav-brand" href="#top" aria-label="Goffee Pizzeria"><img src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria"></a>' +
-      '<div class="nav-links">' + links + '</div>' +
-      '<div class="lang" role="group" aria-label="Lingua / Language">' + langs + '</div></nav>';
+    return '<div class="fnav">' +
+      '<div class="fnav-backdrop"></div>' +
+      '<div class="fnav-sheet" role="dialog" aria-label="' + esc(label) + '">' +
+      '<div class="fnav-sheet-head"><span>' + esc(label) + '</span><button type="button" class="fnav-close" aria-label="Chiudi">×</button></div>' +
+      '<nav class="fnav-list">' + items + '</nav></div>' +
+      '<button type="button" class="fnav-fab" aria-expanded="false" aria-label="' + esc(label) + '">' +
+      GLOBE_SVG + '<span>' + esc(current) + '</span></button></div>';
   }
 
   function noteBox(ui, names) {
@@ -439,11 +470,16 @@
       '<div><span>' + esc(ui.lunch) + '</span><b>' + esc(CONFIG.hours.lunch) + '</b></div>' +
       '<div><span>' + esc(ui.dinner) + '</span><b>' + esc(CONFIG.hours.dinner) + '</b></div>' +
       '<div><span>' + esc(ui.rest) + '</span><b>' + esc(ui.closed) + '</b></div></div>' +
-      callButton(ui, true) + '</div></footer>';
+      callButton(ui, true) + '</div>' +
+      '<div class="foot-legal"><small>' + esc(CONFIG.legal) + '</small>' +
+      '<div class="foot-social">' +
+      '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + IG_SVG + '</a>' +
+      '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + FB_SVG + '</a>' +
+      '</div></div></footer>';
   }
 
   /* ----------------------------- STATO + RENDER --------------------------- */
-  var root, observer, currentLang, activeId = "classiche";
+  var root, currentLang;
 
   function readLang() {
     try {
@@ -466,8 +502,8 @@
     var drinksTone = sez.length % 2 === 0 ? "white" : "ice";
 
     root.innerHTML =
+      snav() +
       '<div class="page" data-card="' + CONFIG.card + '" style="--accent:' + CONFIG.accent + '">' +
-      nav(activeId, currentLang, ui) +
       hero(CONFIG.hero, ui) +
       '<div class="block allerg-top" data-tone="white"><div class="block__inner"><p>' +
       esc(ui.allergTop) + ' <a href="#note" class="allerg-more">' + esc(ui.allergMore) + '</a></p></div></div>' +
@@ -475,11 +511,11 @@
       drinks(MENU.bibite, drinksTone, currentLang, ui, names) +
       noteBox(ui, names) +
       footer(ui) +
-      '</div>';
+      '</div>' +
+      fnav(currentLang);
 
     wireAllergens();
-    wireLang();
-    observeSections();
+    wireFnav();
   }
 
   /* --------------------------- INTERAZIONI -------------------------------- */
@@ -501,35 +537,30 @@
     });
   }
 
-  function wireLang() {
-    root.querySelectorAll(".lang-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var code = btn.getAttribute("data-lang");
-        if (code === currentLang) return;
-        currentLang = code;
-        try { localStorage.setItem(CONFIG.storageKey, code); } catch (e) {}
-        document.documentElement.lang = code;
-        render();
-      });
-    });
+  function setLang(code) {
+    if (!code || code === currentLang || !I18N.ui[code]) return;
+    currentLang = code;
+    try { localStorage.setItem(CONFIG.storageKey, code); } catch (e) {}
+    document.documentElement.lang = code;
+    render();
   }
 
-  // Scrollspy: evidenzia la voce di nav della sezione visibile.
-  function observeSections() {
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting && e.target.id !== activeId) {
-          activeId = e.target.id;
-          root.querySelectorAll(".nav-link").forEach(function (a) {
-            a.classList.toggle("nav-link--active", a.getAttribute("href") === "#" + activeId);
-          });
-        }
-      });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    NAV_IDS.forEach(function (id) {
-      var el = root.querySelector("#" + id);
-      if (el) observer.observe(el);
+  // Pulsante lingua flottante: apertura/chiusura foglio + scelta lingua.
+  function wireFnav() {
+    var fn = root.querySelector(".fnav");
+    if (!fn) return;
+    var fab = fn.querySelector(".fnav-fab");
+    function close() { fn.classList.remove("fnav--open"); if (fab) fab.setAttribute("aria-expanded", "false"); }
+    function open() { fn.classList.add("fnav--open"); if (fab) fab.setAttribute("aria-expanded", "true"); }
+    if (fab) fab.addEventListener("click", function () {
+      fn.classList.contains("fnav--open") ? close() : open();
+    });
+    var x = fn.querySelector(".fnav-close");
+    if (x) x.addEventListener("click", close);
+    var bd = fn.querySelector(".fnav-backdrop");
+    if (bd) bd.addEventListener("click", close);
+    fn.querySelectorAll(".fnav-item").forEach(function (btn) {
+      btn.addEventListener("click", function () { setLang(btn.getAttribute("data-lang")); });
     });
   }
 
@@ -614,6 +645,17 @@
     document.documentElement.lang = currentLang;
     render();        // mostra subito i dati interni (nessuna attesa / nessun vuoto)
     loadSheet();     // se configurato, aggiorna dal Foglio Google e ri-renderizza
+    // Esc chiude il foglio lingua flottante
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var fn = root.querySelector(".fnav--open");
+        if (fn) {
+          fn.classList.remove("fnav--open");
+          var fab = fn.querySelector(".fnav-fab");
+          if (fab) fab.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
   }
 
   if (document.readyState === "loading") {
