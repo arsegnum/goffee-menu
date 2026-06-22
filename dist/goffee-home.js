@@ -11,11 +11,11 @@
   var CONFIG = {
     mount: "#goffee-home-root",
     tel: "0341 851178",
-    // Indirizzo della pagina Menù sul tuo sito Webflow. Lasciato sul valore attuale:
-    // aggiornalo se rinomini la pagina (es. "/menu").
-    menuUrl: "/untitled",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v2/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v2/dist/pizza-top.jpg",
+    // Indirizzo della pagina Menù sul tuo sito Webflow.
+    // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
+    menuUrl: "/menu",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
@@ -178,6 +178,7 @@
   function init() {
     var root = document.querySelector(CONFIG.mount);
     if (!root) { console.error("[Goffee Home] contenitore non trovato:", CONFIG.mount); return; }
+    if (root.dataset && root.dataset.menuUrl) CONFIG.menuUrl = root.dataset.menuUrl;
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer();
     wire(root);
