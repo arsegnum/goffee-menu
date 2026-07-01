@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -309,6 +309,12 @@
   var NAV_IDS = ["classiche", "speciali", "margherita", "pala", "bibite"];
   var LANG_NAMES = { it: "Italiano", en: "English", de: "Deutsch", fr: "Français" };
   var LANG_LABEL = { it: "Lingua", en: "Language", de: "Sprache", fr: "Langue" };
+  var ORDER_I18N = {
+    it: { cta: "Ordina ora", title: "Come vuoi ordinare?", online: "Ordina online", close: "Chiudi" },
+    en: { cta: "Order now", title: "How would you like to order?", online: "Order online", close: "Close" },
+    de: { cta: "Jetzt bestellen", title: "Wie möchtest du bestellen?", online: "Online bestellen", close: "Schließen" },
+    fr: { cta: "Commander", title: "Comment souhaitez-vous commander ?", online: "Commander en ligne", close: "Fermer" }
+  };
 
   var GLOBE_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
@@ -348,14 +354,30 @@
       '<span>' + esc(ui.call) + ' — <strong>' + esc(CONFIG.tel) + '</strong></span></a>';
   }
 
-  // Pulsante ordinazione online: link diretto alla pagina di ordinazione, stile del sito.
-  function glf(cls, label) {
-    return '<a class="' + cls + '" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(label) + '</a>';
+  // Pulsante "Ordina ora": apre la finestra con la scelta (online / chiama).
+  function orderTrigger(cls) {
+    var o = ORDER_I18N[currentLang] || ORDER_I18N.it;
+    return '<button type="button" class="' + cls + ' order-trigger">' + esc(o.cta) + '</button>';
   }
 
-  // Riga pulsanti: ordinazione online (primario) + chiama (ghost).
-  function ctaRow(ui) {
-    return '<div class="cta-row">' + glf("btn btn--big", CONFIG.glfLabel) + callButton(ui, true, true) + '</div>';
+  // Riga pulsante ordina (centrata) per hero e footer.
+  function ctaRow() {
+    return '<div class="cta-row">' + orderTrigger("btn btn--big") + '</div>';
+  }
+
+  // Finestra di scelta: Ordina online (foodbooking) oppure Chiama (telefono).
+  function orderModal(ui) {
+    var o = ORDER_I18N[currentLang] || ORDER_I18N.it;
+    var tel = CONFIG.tel.replace(/\s/g, "");
+    return '<div class="ord-modal" role="dialog" aria-modal="true" aria-label="' + esc(o.title) + '">' +
+      '<div class="ord-backdrop"></div>' +
+      '<div class="ord-card">' +
+      '<button type="button" class="ord-close" aria-label="' + esc(o.close) + '">×</button>' +
+      '<h3 class="ord-title">' + esc(o.title) + '</h3>' +
+      '<div class="ord-actions">' +
+      '<a class="btn btn--big ord-opt" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(o.online) + '</a>' +
+      '<a class="btn btn--big btn--ghost ord-opt" href="tel:' + esc(tel) + '">' + PHONE_SVG.replace(/\{S\}/g, 18) + '<span>' + esc(ui.call) + ' — ' + esc(CONFIG.tel) + '</span></a>' +
+      '</div></div></div>';
   }
 
   // span allergeni con tooltip (numeri localizzati nel testo del popup)
@@ -437,7 +459,7 @@
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '">Home</a>' +
       '<a class="snav__link snav__link--active" href="#top">Menù</a>' +
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '#contatti">Dove siamo</a>' +
-      glf("snav__cta", CONFIG.glfNavLabel) +
+      orderTrigger("snav__cta") +
       '</div></nav></header>';
   }
 
@@ -525,10 +547,26 @@
       noteBox(ui, names) +
       footer(ui) +
       '</div>' +
-      fnav(currentLang);
+      fnav(currentLang) +
+      orderModal(ui);
 
     wireAllergens();
     wireFnav();
+    wireOrder();
+  }
+
+  // Finestra "Ordina": apertura dai pulsanti .order-trigger, chiusura da backdrop/×/scelta.
+  function wireOrder() {
+    var modal = root.querySelector(".ord-modal");
+    if (!modal) return;
+    function open() { modal.classList.add("ord-open"); }
+    function close() { modal.classList.remove("ord-open"); }
+    root.querySelectorAll(".order-trigger").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); open(); });
+    });
+    var bd = modal.querySelector(".ord-backdrop"); if (bd) bd.addEventListener("click", close);
+    var x = modal.querySelector(".ord-close"); if (x) x.addEventListener("click", close);
+    modal.querySelectorAll(".ord-opt").forEach(function (a) { a.addEventListener("click", close); });
   }
 
   /* --------------------------- INTERAZIONI -------------------------------- */
@@ -669,6 +707,8 @@
           var fab = fn.querySelector(".fnav-fab");
           if (fab) fab.setAttribute("aria-expanded", "false");
         }
+        var m = root.querySelector(".ord-modal.ord-open");
+        if (m) m.classList.remove("ord-open");
       }
     });
   }

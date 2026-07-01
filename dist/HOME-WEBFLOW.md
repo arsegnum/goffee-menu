@@ -7,9 +7,9 @@ non dentro una pagina che ha già barra di navigazione e footer suoi.
 ## Snippet (già ospitato, pronto)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-home.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-home.css">
 <div id="goffee-home-root"></div>
-<script src="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-home.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-home.js"></script>
 ```
 
 ## Come integrarla

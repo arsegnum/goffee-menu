@@ -14,8 +14,8 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
@@ -52,9 +52,24 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
-  // Pulsante ordinazione online: link diretto alla pagina di ordinazione, stile del sito.
-  function glf(cls, label) {
-    return '<a class="' + cls + '" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(label) + '</a>';
+  var ORDER = { cta: "Ordina ora", title: "Come vuoi ordinare?", online: "Ordina online", call: "Chiama per ordinare", close: "Chiudi" };
+
+  // Pulsante "Ordina ora": apre la finestra con la scelta (online / chiama).
+  function orderTrigger(cls) {
+    return '<button type="button" class="' + cls + ' order-trigger">' + esc(ORDER.cta) + '</button>';
+  }
+
+  // Finestra di scelta: Ordina online (foodbooking) oppure Chiama (telefono).
+  function orderModal() {
+    return '<div class="ord-modal" role="dialog" aria-modal="true" aria-label="' + esc(ORDER.title) + '">' +
+      '<div class="ord-backdrop"></div>' +
+      '<div class="ord-card">' +
+      '<button type="button" class="ord-close" aria-label="' + esc(ORDER.close) + '">×</button>' +
+      '<h3 class="ord-title">' + esc(ORDER.title) + '</h3>' +
+      '<div class="ord-actions">' +
+      '<a class="btn btn--lg ord-opt" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(ORDER.online) + '</a>' +
+      '<a class="btn btn--lg btn--ghost ord-opt" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' ' + esc(ORDER.call) + ' — ' + esc(CONFIG.tel) + '</a>' +
+      '</div></div></div>';
   }
 
   function navbar() {
@@ -66,10 +81,10 @@
       '<a class="gnav__link gnav__link--active" href="#top">Home</a>' +
       '<a class="gnav__link" href="' + esc(CONFIG.menuUrl) + '">Menù</a>' +
       '<a class="gnav__link" href="#contatti">Dove siamo</a>' +
-      glf("btn", CONFIG.glfNavLabel) +
+      orderTrigger("btn") +
       '</div>' +
       '<div class="gnav__actions">' +
-      glf("btn", CONFIG.glfNavLabel) +
+      orderTrigger("btn") +
       '<button class="gnav__toggle" type="button" aria-label="Apri menù" aria-expanded="false">' + ICON.burger + '</button>' +
       '</div>' +
       '</nav></header>';
@@ -82,8 +97,7 @@
       '<h1 class="hero__title">La pizza che <em>conquista</em> la tua tavola.</h1>' +
       '<p class="hero__sub">Niente fretta, solo lievito e tempo.</p>' +
       '<div class="hero__cta">' +
-      glf("btn btn--lg", CONFIG.glfLabel) +
-      '<a class="btn btn--lg btn--ghost" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama — ' + esc(CONFIG.tel) + '</a>' +
+      orderTrigger("btn btn--lg") +
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.menuUrl) + '">Vedi il menù</a>' +
       '</div>' +
       '<div class="hero__chips">' +
@@ -128,8 +142,7 @@
       '<div><span>Riposo</span><b>' + esc(CONFIG.hours.closed) + '</b></div>' +
       '</div>' +
       '<div class="foot-cta">' +
-      glf("btn btn--lg", CONFIG.glfLabel) +
-      '<a class="btn btn--lg btn--ghost" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama per ordinare</a>' +
+      orderTrigger("btn btn--lg") +
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
       '</div></div>' +
       '<div class="foot-legal">' +
@@ -191,8 +204,24 @@
     if (root.dataset && root.dataset.menuUrl) CONFIG.menuUrl = root.dataset.menuUrl;
     if (root.dataset && root.dataset.orderUrl) CONFIG.orderUrl = root.dataset.orderUrl;
     root.classList.add("goffee-home");
-    root.innerHTML = navbar() + hero() + teaser() + footer();
+    root.innerHTML = navbar() + hero() + teaser() + footer() + orderModal();
     wire(root);
+    wireOrder(root);
+  }
+
+  // Finestra "Ordina": apertura dai pulsanti .order-trigger, chiusura da backdrop/×/scelta/Esc.
+  function wireOrder(root) {
+    var modal = root.querySelector(".ord-modal");
+    if (!modal) return;
+    function open() { modal.classList.add("ord-open"); }
+    function close() { modal.classList.remove("ord-open"); }
+    root.querySelectorAll(".order-trigger").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); open(); });
+    });
+    var bd = modal.querySelector(".ord-backdrop"); if (bd) bd.addEventListener("click", close);
+    var x = modal.querySelector(".ord-close"); if (x) x.addEventListener("click", close);
+    modal.querySelectorAll(".ord-opt").forEach(function (a) { a.addEventListener("click", close); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   }
 
   if (document.readyState === "loading") {
