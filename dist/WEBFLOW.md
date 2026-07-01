@@ -45,14 +45,14 @@ Non devi caricare nulla: ti basta incollare lo snippet qui sotto in Webflow.
 Snippet da incollare in un elemento **Embed** della pagina:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-menu.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-menu.css">
 <div id="goffee-menu-root"></div>
-<script src="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-menu.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-menu.js"></script>
 ```
 
 Per aggiornare il menù in futuro: si modifica `dist/goffee-menu.js`, si fa commit/push,
 e jsDelivr propaga il nuovo file (la cache di `@main` si aggiorna entro ~12h; per forzarla
-subito si apre una volta `https://purge.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-menu.js`).
+subito si apre una volta `https://purge.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-menu.js`).
 
 ## Come integrarlo in Webflow
 

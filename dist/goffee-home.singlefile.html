@@ -188,14 +188,19 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v4/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
     instagram: "#",
-    facebook: "#"
+    facebook: "#",
+    // Ordinazione online GloriaFood (Pizzeria Goffee)
+    glfCuid: "b32d7c17-f989-4a1c-8fb2-d742de772f04",
+    glfRuid: "566de29e-8e05-47ca-982b-d02ae447a4a2",
+    glfLabel: "Vedi Menu & Ordina",
+    glfNavLabel: "Ordina ora"
   };
 
   var ICON = {
@@ -222,6 +227,11 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
+  // Pulsante ordinazione online GloriaFood, con lo stile del sito (classi .btn).
+  function glf(cls, label) {
+    return '<a class="' + cls + '" data-glf-cuid="' + esc(CONFIG.glfCuid) + '" data-glf-ruid="' + esc(CONFIG.glfRuid) +
+      '" href="https://www.gloriafood.com" rel="nofollow">' + esc(label) + '</a>';
+  }
 
   function navbar() {
     return '' +
@@ -232,10 +242,10 @@
       '<a class="gnav__link gnav__link--active" href="#top">Home</a>' +
       '<a class="gnav__link" href="' + esc(CONFIG.menuUrl) + '">Menù</a>' +
       '<a class="gnav__link" href="#contatti">Dove siamo</a>' +
-      '<a class="btn" href="' + telHref() + '">Ordina ora</a>' +
+      glf("btn", CONFIG.glfNavLabel) +
       '</div>' +
       '<div class="gnav__actions">' +
-      '<a class="btn" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 17) + ' Ordina ora</a>' +
+      glf("btn", CONFIG.glfNavLabel) +
       '<button class="gnav__toggle" type="button" aria-label="Apri menù" aria-expanded="false">' + ICON.burger + '</button>' +
       '</div>' +
       '</nav></header>';
@@ -248,7 +258,8 @@
       '<h1 class="hero__title">La pizza che <em>conquista</em> la tua tavola.</h1>' +
       '<p class="hero__sub">Niente fretta, solo lievito e tempo.</p>' +
       '<div class="hero__cta">' +
-      '<a class="btn btn--lg" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Ordina ora — ' + esc(CONFIG.tel) + '</a>' +
+      glf("btn btn--lg", CONFIG.glfLabel) +
+      '<a class="btn btn--lg btn--ghost" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama — ' + esc(CONFIG.tel) + '</a>' +
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.menuUrl) + '">Vedi il menù</a>' +
       '</div>' +
       '<div class="hero__chips">' +
@@ -293,7 +304,8 @@
       '<div><span>Riposo</span><b>' + esc(CONFIG.hours.closed) + '</b></div>' +
       '</div>' +
       '<div class="foot-cta">' +
-      '<a class="btn btn--lg" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama per ordinare</a>' +
+      glf("btn btn--lg", CONFIG.glfLabel) +
+      '<a class="btn btn--lg btn--ghost" href="' + telHref() + '">' + ICON.phone.replace(/\{S\}/g, 18) + ' Chiama per ordinare</a>' +
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
       '</div></div>' +
       '<div class="foot-legal">' +
@@ -349,6 +361,19 @@
     });
   }
 
+  // Carica lo script di ordinazione GloriaFood (una sola volta) e aggancia i pulsanti.
+  function loadGlf() {
+    if (document.getElementById("glf-embed-script")) {
+      if (typeof window.glfBindButtons === "function") window.glfBindButtons();
+      return;
+    }
+    var s = document.createElement("script");
+    s.id = "glf-embed-script";
+    s.src = "https://www.fbgcdn.com/embedder/js/ewm2.js";
+    s.defer = true; s.async = true;
+    document.body.appendChild(s);
+  }
+
   function init() {
     var root = document.querySelector(CONFIG.mount);
     if (!root) { console.error("[Goffee Home] contenitore non trovato:", CONFIG.mount); return; }
@@ -356,6 +381,7 @@
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer();
     wire(root);
+    loadGlf();
   }
 
   if (document.readyState === "loading") {

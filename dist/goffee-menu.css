@@ -102,6 +102,9 @@
 .goffee-menu .btn--big{font-size:1.05rem;padding:16px 32px;}
 .goffee-menu .btn:hover{filter:brightness(1.06);}
 .goffee-menu .btn:active{transform:scale(.985);}
+.goffee-menu .btn--ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+.goffee-menu .btn--ghost:hover{filter:none;border-color:var(--ink);}
+.goffee-menu .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;}
 
 /* ---------- HERO ---------- */
 .goffee-menu .hero .block__inner{padding-top:clamp(72px,14vh,160px);padding-bottom:clamp(48px,8vw,88px);text-align:center;}

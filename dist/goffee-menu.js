@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v5/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -30,7 +30,12 @@
     storageKey: "goffee-lang",
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
     instagram: "#",
-    facebook: "#"
+    facebook: "#",
+    // Ordinazione online GloriaFood (Pizzeria Goffee)
+    glfCuid: "b32d7c17-f989-4a1c-8fb2-d742de772f04",
+    glfRuid: "566de29e-8e05-47ca-982b-d02ae447a4a2",
+    glfLabel: "Vedi Menu & Ordina",
+    glfNavLabel: "Ordina ora"
   };
 
   /* ------------------------------ DATI ------------------------------------ */
@@ -337,11 +342,22 @@
     '<path d="M12 3C8 7.5 7.5 15 12 20.5C16.5 15 16 7.5 12 3Z" fill="currentColor"/>' +
     '<path d="M12 23V7M12 11.5L9 9.5M12 11.5L15 9.5M12 15.5L9.6 13.8M12 15.5L14.4 13.8" stroke="var(--bg)" stroke-width="1.1" stroke-linecap="round"/></svg></span>';
 
-  function callButton(ui, big) {
+  function callButton(ui, big, ghost) {
     var tel = CONFIG.tel.replace(/\s/g, "");
-    return '<a class="btn' + (big ? " btn--big" : "") + '" href="tel:' + esc(tel) + '">' +
+    return '<a class="btn' + (big ? " btn--big" : "") + (ghost ? " btn--ghost" : "") + '" href="tel:' + esc(tel) + '">' +
       PHONE_SVG.replace(/\{S\}/g, big ? 19 : 17) +
       '<span>' + esc(ui.call) + ' — <strong>' + esc(CONFIG.tel) + '</strong></span></a>';
+  }
+
+  // Pulsante ordinazione online GloriaFood, con lo stile del sito (classi .btn).
+  function glf(cls, label) {
+    return '<a class="' + cls + '" data-glf-cuid="' + esc(CONFIG.glfCuid) + '" data-glf-ruid="' + esc(CONFIG.glfRuid) +
+      '" href="https://www.gloriafood.com" rel="nofollow">' + esc(label) + '</a>';
+  }
+
+  // Riga pulsanti: ordinazione online (primario) + chiama (ghost).
+  function ctaRow(ui) {
+    return '<div class="cta-row">' + glf("btn btn--big", CONFIG.glfLabel) + callButton(ui, true, true) + '</div>';
   }
 
   // span allergeni con tooltip (numeri localizzati nel testo del popup)
@@ -412,19 +428,18 @@
       '<span class="eyebrow">' + esc(ui.heroPlace) + '</span>' +
       '<h1 class="hero-title">Menù</h1>' +
       '<p class="hero-sub">' + esc(ui.heroSub) + '</p>' +
-      callButton(ui, true) + '</div>' + photo + '</div></header>';
+      ctaRow(ui) + '</div>' + photo + '</div></header>';
   }
 
   // Navbar di sito (coerente con la home): Home / Menù / Dove siamo / Ordina ora
   function snav() {
-    var tel = "tel:" + CONFIG.tel.replace(/\s/g, "");
     return '<header class="snav"><nav class="snav__bar" aria-label="Navigazione sito">' +
       '<a class="snav__brand" href="' + esc(CONFIG.homeUrl) + '" aria-label="Goffee Pizzeria — home"><img src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria"></a>' +
       '<div class="snav__links">' +
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '">Home</a>' +
       '<a class="snav__link snav__link--active" href="#top">Menù</a>' +
       '<a class="snav__link" href="' + esc(CONFIG.homeUrl) + '#contatti">Dove siamo</a>' +
-      '<a class="snav__cta" href="' + tel + '">' + PHONE_SVG.replace(/\{S\}/g, 17) + 'Ordina ora</a>' +
+      glf("snav__cta", CONFIG.glfNavLabel) +
       '</div></nav></header>';
   }
 
@@ -470,7 +485,7 @@
       '<div><span>' + esc(ui.lunch) + '</span><b>' + esc(CONFIG.hours.lunch) + '</b></div>' +
       '<div><span>' + esc(ui.dinner) + '</span><b>' + esc(CONFIG.hours.dinner) + '</b></div>' +
       '<div><span>' + esc(ui.rest) + '</span><b>' + esc(ui.closed) + '</b></div></div>' +
-      callButton(ui, true) + '</div>' +
+      ctaRow(ui) + '</div>' +
       '<div class="foot-legal"><small>' + esc(CONFIG.legal) + '</small>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + IG_SVG + '</a>' +
@@ -516,6 +531,21 @@
 
     wireAllergens();
     wireFnav();
+    loadGlf();
+  }
+
+  // Carica lo script di ordinazione GloriaFood (una volta) e ri-aggancia i pulsanti
+  // a ogni render (necessario perché il menù si ridisegna al cambio lingua).
+  function loadGlf() {
+    if (document.getElementById("glf-embed-script")) {
+      if (typeof window.glfBindButtons === "function") window.glfBindButtons();
+      return;
+    }
+    var s = document.createElement("script");
+    s.id = "glf-embed-script";
+    s.src = "https://www.fbgcdn.com/embedder/js/ewm2.js";
+    s.defer = true; s.async = true;
+    document.body.appendChild(s);
   }
 
   /* --------------------------- INTERAZIONI -------------------------------- */
