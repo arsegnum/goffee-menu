@@ -20,9 +20,9 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
-    hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
+    hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
     hero: "centrato",                // centrato | sfondo | foto
     accent: "#D6452B",
@@ -691,8 +691,13 @@
       console.error("[Goffee] contenitore non trovato:", CONFIG.mount);
       return;
     }
-    if (root.dataset && root.dataset.homeUrl) CONFIG.homeUrl = root.dataset.homeUrl;
-    if (root.dataset && root.dataset.orderUrl) CONFIG.orderUrl = root.dataset.orderUrl;
+    var d = root.dataset || {};
+    if (d.homeUrl) CONFIG.homeUrl = d.homeUrl;
+    if (d.orderUrl) CONFIG.orderUrl = d.orderUrl;
+    if (d.tel) CONFIG.tel = d.tel;
+    if (d.lunch) CONFIG.hours.lunch = d.lunch;
+    if (d.dinner) CONFIG.hours.dinner = d.dinner;
+    if (d.address) CONFIG.address = d.address;
     root.classList.add("goffee-menu");
     currentLang = readLang();
     document.documentElement.lang = currentLang;

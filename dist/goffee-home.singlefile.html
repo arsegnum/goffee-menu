@@ -201,11 +201,11 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v8/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
-    hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
+    hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00", closed: "Lunedì chiuso" },
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
     instagram: "#",
     facebook: "#",
@@ -388,8 +388,14 @@
   function init() {
     var root = document.querySelector(CONFIG.mount);
     if (!root) { console.error("[Goffee Home] contenitore non trovato:", CONFIG.mount); return; }
-    if (root.dataset && root.dataset.menuUrl) CONFIG.menuUrl = root.dataset.menuUrl;
-    if (root.dataset && root.dataset.orderUrl) CONFIG.orderUrl = root.dataset.orderUrl;
+    var d = root.dataset || {};
+    if (d.menuUrl) CONFIG.menuUrl = d.menuUrl;
+    if (d.orderUrl) CONFIG.orderUrl = d.orderUrl;
+    if (d.tel) CONFIG.tel = d.tel;
+    if (d.lunch) CONFIG.hours.lunch = d.lunch;
+    if (d.dinner) CONFIG.hours.dinner = d.dinner;
+    if (d.closed) CONFIG.hours.closed = d.closed;
+    if (d.address) CONFIG.address = d.address;
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer() + orderModal();
     wire(root);
