@@ -14,17 +14,16 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00", closed: "Lunedì chiuso" },
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
     instagram: "#",
     facebook: "#",
-    // Ordinazione online GloriaFood (Pizzeria Goffee)
-    glfCuid: "b32d7c17-f989-4a1c-8fb2-d742de772f04",
-    glfRuid: "566de29e-8e05-47ca-982b-d02ae447a4a2",
+    // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
+    orderUrl: "https://www.foodbooking.com/api/fb/_q_jn_z_v",
     glfLabel: "Vedi Menu & Ordina",
     glfNavLabel: "Ordina ora"
   };
@@ -53,10 +52,9 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
-  // Pulsante ordinazione online GloriaFood, con lo stile del sito (classi .btn).
+  // Pulsante ordinazione online: link diretto alla pagina di ordinazione, stile del sito.
   function glf(cls, label) {
-    return '<a class="' + cls + '" data-glf-cuid="' + esc(CONFIG.glfCuid) + '" data-glf-ruid="' + esc(CONFIG.glfRuid) +
-      '" href="https://www.gloriafood.com" rel="nofollow">' + esc(label) + '</a>';
+    return '<a class="' + cls + '" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(label) + '</a>';
   }
 
   function navbar() {
@@ -187,27 +185,14 @@
     });
   }
 
-  // Carica lo script di ordinazione GloriaFood (una sola volta) e aggancia i pulsanti.
-  function loadGlf() {
-    if (document.getElementById("glf-embed-script")) {
-      if (typeof window.glfBindButtons === "function") window.glfBindButtons();
-      return;
-    }
-    var s = document.createElement("script");
-    s.id = "glf-embed-script";
-    s.src = "https://www.fbgcdn.com/embedder/js/ewm2.js";
-    s.defer = true; s.async = true;
-    document.body.appendChild(s);
-  }
-
   function init() {
     var root = document.querySelector(CONFIG.mount);
     if (!root) { console.error("[Goffee Home] contenitore non trovato:", CONFIG.mount); return; }
     if (root.dataset && root.dataset.menuUrl) CONFIG.menuUrl = root.dataset.menuUrl;
+    if (root.dataset && root.dataset.orderUrl) CONFIG.orderUrl = root.dataset.orderUrl;
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer();
     wire(root);
-    loadGlf();
   }
 
   if (document.readyState === "loading") {

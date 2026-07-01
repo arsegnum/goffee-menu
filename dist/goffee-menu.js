@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v6/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v7/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "17:30 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -31,9 +31,8 @@
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
     instagram: "#",
     facebook: "#",
-    // Ordinazione online GloriaFood (Pizzeria Goffee)
-    glfCuid: "b32d7c17-f989-4a1c-8fb2-d742de772f04",
-    glfRuid: "566de29e-8e05-47ca-982b-d02ae447a4a2",
+    // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
+    orderUrl: "https://www.foodbooking.com/api/fb/_q_jn_z_v",
     glfLabel: "Vedi Menu & Ordina",
     glfNavLabel: "Ordina ora"
   };
@@ -349,10 +348,9 @@
       '<span>' + esc(ui.call) + ' — <strong>' + esc(CONFIG.tel) + '</strong></span></a>';
   }
 
-  // Pulsante ordinazione online GloriaFood, con lo stile del sito (classi .btn).
+  // Pulsante ordinazione online: link diretto alla pagina di ordinazione, stile del sito.
   function glf(cls, label) {
-    return '<a class="' + cls + '" data-glf-cuid="' + esc(CONFIG.glfCuid) + '" data-glf-ruid="' + esc(CONFIG.glfRuid) +
-      '" href="https://www.gloriafood.com" rel="nofollow">' + esc(label) + '</a>';
+    return '<a class="' + cls + '" href="' + esc(CONFIG.orderUrl) + '" target="_blank" rel="noopener">' + esc(label) + '</a>';
   }
 
   // Riga pulsanti: ordinazione online (primario) + chiama (ghost).
@@ -531,21 +529,6 @@
 
     wireAllergens();
     wireFnav();
-    loadGlf();
-  }
-
-  // Carica lo script di ordinazione GloriaFood (una volta) e ri-aggancia i pulsanti
-  // a ogni render (necessario perché il menù si ridisegna al cambio lingua).
-  function loadGlf() {
-    if (document.getElementById("glf-embed-script")) {
-      if (typeof window.glfBindButtons === "function") window.glfBindButtons();
-      return;
-    }
-    var s = document.createElement("script");
-    s.id = "glf-embed-script";
-    s.src = "https://www.fbgcdn.com/embedder/js/ewm2.js";
-    s.defer = true; s.async = true;
-    document.body.appendChild(s);
   }
 
   /* --------------------------- INTERAZIONI -------------------------------- */
@@ -671,6 +654,7 @@
       return;
     }
     if (root.dataset && root.dataset.homeUrl) CONFIG.homeUrl = root.dataset.homeUrl;
+    if (root.dataset && root.dataset.orderUrl) CONFIG.orderUrl = root.dataset.orderUrl;
     root.classList.add("goffee-menu");
     currentLang = readLang();
     document.documentElement.lang = currentLang;
