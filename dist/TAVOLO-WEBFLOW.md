@@ -25,10 +25,10 @@ nella lingua scelta. Niente ordinazione online qui.
 ## 2) QR code
 
 `goffee-qr.svg` (per stampa, vettoriale) e `goffee-qr.png` puntano a
-`https://coming-soon-goffee.webflow.io/tavolo`.
+`https://www.pizzeriagoffee.it/tavolo`.
 
-⚠️ Il QR è "congelato" su quell'indirizzo. Se un domani colleghi un **dominio tuo**
-(es. `www.pizzeriagoffee.it/tavolo`), va **rigenerato** — dimmelo e te lo rifaccio.
+⚠️ Perché lo scan funzioni, la pagina **`/tavolo` dev'essere pubblicata su
+`www.pizzeriagoffee.it`**. Se cambi di nuovo dominio/slug, il QR va rigenerato: dimmelo.
 
 ## 3) Volantino A6 da stampare
 
