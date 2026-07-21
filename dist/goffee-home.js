@@ -14,8 +14,8 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00", closed: "Lunedì chiuso" },
@@ -122,7 +122,7 @@
       '<div class="menu-head reveal">' +
       '<span class="kicker">Dal nostro forno</span>' +
       '<h2 class="sec__title">Qualche idea dal menù</h2>' +
-      '<p class="sec__lead">Dalle classiche di sempre alle Creazioni gourmet. Il menù completo è molto più ricco.</p>' +
+      '<p class="sec__lead">Dalle classiche di sempre alle Creazioni. Il menù completo è molto più ricco.</p>' +
       '</div>' +
       '<div class="pizza-list reveal">' + rows + '</div>' +
       '<div class="menu-foot reveal"><a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.menuUrl) + '">Vedi tutto il menù ' + ICON.arrow + '</a></div>' +
