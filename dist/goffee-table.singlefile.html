@@ -1,86 +1,96 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="it"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Goffee — Benvenuto</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>html{-webkit-text-size-adjust:100%;}body{margin:0;}
 /* Goffee — Pagina "Tavolo" (QR): scelta lingua → istruzioni → menù.
-   Self-contained, isolato sotto .goffee-table. */
+   Design moderno/elegante. Self-contained, isolato sotto .goffee-table. */
 .goffee-table{
   --white:#FFFFFF;
-  --ice:#FAFAFA;
-  --ink:#1D1D1F;
-  --muted:#6E6E73;
-  --line:#ECECEC;
+  --ink:#221C1A;
+  --muted:#8B837D;
+  --line:#EDE7E2;
   --accent:#D6452B;
+  --accent-soft:#F8EAE5;
   --font:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
-  --pad:clamp(22px, 6vw, 40px);
-  min-height:100vh;background:var(--ice);color:var(--ink);
-  font-family:var(--font);font-size:17px;line-height:1.55;letter-spacing:-.01em;
-  -webkit-font-smoothing:antialiased;
-  display:flex;align-items:flex-start;justify-content:center;padding:clamp(28px,8vw,64px) var(--pad);
+  min-height:100vh;min-height:100dvh;
+  background:radial-gradient(135% 95% at 50% -12%, #FFFFFF 0%, #FCF7F3 46%, #F3EAE3 100%);
+  color:var(--ink);
+  font-family:var(--font);font-size:17px;line-height:1.55;letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,6vw,52px);
+  position:relative;overflow-x:hidden;
 }
 .goffee-table *{box-sizing:border-box;}
 .goffee-table img{max-width:100%;display:block;}
+/* bagliore caldo decorativo */
+.goffee-table::before{content:"";position:fixed;left:50%;top:-8%;width:min(560px,92vw);height:340px;
+  transform:translateX(-50%);background:radial-gradient(circle, rgba(214,69,43,.13), transparent 68%);
+  filter:blur(18px);pointer-events:none;z-index:0;}
 
-.goffee-table .gt-wrap{width:100%;max-width:520px;text-align:center;}
-.goffee-table .gt-logo{height:46px;width:auto;margin:0 auto clamp(24px,5vw,34px);}
-
-.goffee-table .gt-h1{font-weight:700;font-size:clamp(1.9rem,6.5vw,2.7rem);line-height:1.05;letter-spacing:-.035em;margin:0 0 .35em;color:var(--ink);text-wrap:balance;}
-.goffee-table .gt-sub{color:var(--muted);font-size:.98rem;line-height:1.5;margin:0 auto clamp(26px,5vw,34px);max-width:34ch;text-wrap:pretty;}
+.goffee-table .gt-card{
+  position:relative;z-index:1;width:100%;max-width:440px;text-align:center;
+  background:var(--white);border:1px solid var(--line);border-radius:30px;
+  box-shadow:0 1px 1px rgba(90,45,25,.03), 0 44px 90px -44px rgba(90,45,25,.34), 0 14px 34px -22px rgba(90,45,25,.18);
+  padding:clamp(30px,7vw,44px) clamp(24px,6vw,38px) clamp(26px,6vw,36px);
+}
+.goffee-table .gt-logo{height:38px;width:auto;margin:0 auto clamp(18px,4vw,24px);}
+.goffee-table .gt-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;}
+.goffee-table .gt-h1{font-weight:600;font-size:clamp(1.62rem,5.6vw,2.15rem);line-height:1.1;letter-spacing:-.028em;margin:0 0 .55em;color:var(--ink);text-wrap:balance;}
+.goffee-table .gt-sub{color:var(--muted);font-size:.98rem;line-height:1.5;margin:0 auto clamp(24px,5vw,30px);max-width:30ch;text-wrap:pretty;}
 
 /* --- scelta lingua --- */
-.goffee-table .gt-langs{display:flex;flex-direction:column;gap:12px;}
+.goffee-table .gt-langs{display:flex;flex-direction:column;gap:10px;}
 .goffee-table .gt-lang{
   appearance:none;cursor:pointer;font-family:inherit;
   display:flex;align-items:center;gap:14px;width:100%;
-  background:var(--white);border:1px solid var(--line);border-radius:16px;
-  padding:16px 18px;font-size:1.12rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;
-  box-shadow:0 1px 2px rgba(0,0,0,.03);
-  transition:transform .15s cubic-bezier(.2,.7,.3,1), border-color .18s ease, box-shadow .18s ease;
+  background:var(--white);border:1px solid var(--line);border-radius:16px;padding:12px 15px;
+  transition:transform .16s cubic-bezier(.2,.7,.3,1), border-color .18s ease, box-shadow .18s ease;
 }
-.goffee-table .gt-lang:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.25);}
+.goffee-table .gt-lang:hover{border-color:rgba(214,69,43,.4);transform:translateY(-2px);box-shadow:0 16px 32px -20px rgba(90,45,25,.45);}
 .goffee-table .gt-lang:active{transform:translateY(0);}
-.goffee-table .gt-flag{font-size:1.5rem;line-height:1;flex:none;}
-.goffee-table .gt-lang b{font-weight:500;flex:1;text-align:left;}
-.goffee-table .gt-chevron{color:var(--muted);flex:none;}
+.goffee-table .gt-flag{width:38px;height:38px;flex:none;border-radius:50%;background:var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem;line-height:1;}
+.goffee-table .gt-lang-name{flex:1;text-align:left;font-size:1.08rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;}
+.goffee-table .gt-chevron{color:var(--muted);flex:none;transition:transform .18s ease, color .18s ease;}
+.goffee-table .gt-lang:hover .gt-chevron{color:var(--accent);transform:translateX(3px);}
 
-/* --- istruzioni --- */
-.goffee-table .gt-steps{list-style:none;margin:0 0 clamp(28px,5vw,36px);padding:0;display:flex;flex-direction:column;gap:2px;text-align:left;}
-.goffee-table .gt-step{display:flex;align-items:flex-start;gap:15px;padding:15px 4px;border-bottom:1px solid var(--line);}
-.goffee-table .gt-step:last-child{border-bottom:none;}
-.goffee-table .gt-step-n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;
-  font-size:.98rem;font-weight:600;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
-.goffee-table .gt-step-t{font-size:1.04rem;line-height:1.45;color:var(--ink);padding-top:2px;}
+/* --- istruzioni (timeline) --- */
+.goffee-table .gt-steps{list-style:none;margin:0 0 clamp(24px,5vw,30px);padding:0;text-align:left;}
+.goffee-table .gt-step{position:relative;display:flex;gap:16px;padding:0 0 20px 0;}
+.goffee-table .gt-step:last-child{padding-bottom:2px;}
+.goffee-table .gt-step:not(:last-child)::before{content:"";position:absolute;left:15px;top:32px;bottom:2px;width:2px;
+  transform:translateX(-50%);background:var(--accent-soft);border-radius:2px;}
+.goffee-table .gt-step-n{position:relative;z-index:1;flex:none;width:30px;height:30px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:.94rem;font-weight:600;display:flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums;box-shadow:0 5px 12px -4px rgba(214,69,43,.55);}
+.goffee-table .gt-step-t{font-size:1.01rem;line-height:1.5;color:var(--ink);padding-top:3px;}
 .goffee-table .gt-step-t b{font-weight:600;}
 
 .goffee-table .gt-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;
-  background:var(--accent);color:#fff;text-decoration:none;
-  font-family:inherit;font-weight:600;font-size:1.08rem;letter-spacing:-.01em;
-  padding:17px 28px;border-radius:980px;border:none;cursor:pointer;
-  transition:filter .18s ease, transform .18s cubic-bezier(.2,.7,.3,1);
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  background:var(--accent);color:#fff;text-decoration:none;font-family:inherit;font-weight:600;font-size:1.06rem;
+  letter-spacing:-.01em;padding:16px 26px;border-radius:999px;border:none;cursor:pointer;
+  box-shadow:0 14px 30px -12px rgba(214,69,43,.6);
+  transition:transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s ease, filter .18s ease;
 }
-.goffee-table .gt-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.goffee-table .gt-btn:hover{transform:translateY(-2px);box-shadow:0 22px 42px -14px rgba(214,69,43,.65);filter:brightness(1.03);}
 .goffee-table .gt-btn:active{transform:translateY(0);}
 .goffee-table .gt-btn svg{display:block;}
-.goffee-table .gt-change{display:inline-block;margin-top:18px;background:none;border:none;cursor:pointer;
-  font-family:inherit;font-size:.92rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px;}
-.goffee-table .gt-change:hover{color:var(--ink);}
+.goffee-table .gt-change{display:inline-block;margin-top:16px;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:.9rem;color:var(--muted);padding:8px;border-radius:8px;transition:color .18s ease;}
+.goffee-table .gt-change:hover{color:var(--accent);}
 
-/* --- passi di visibilità --- */
-.goffee-table .gt-screen{animation:gtFade .25s ease;}
-@keyframes gtFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+/* --- transizioni tra passi --- */
+.goffee-table .gt-screen{animation:gtFade .3s cubic-bezier(.2,.7,.3,1);}
+@keyframes gtFade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@media(prefers-reduced-motion:reduce){.goffee-table .gt-screen{animation:none;}}
 .goffee-table[data-step="lang"] .gt-instructions{display:none;}
 .goffee-table[data-step="instructions"] .gt-choose{display:none;}
 </content>
-</style>
-</head>
-<body>
-<div id="goffee-table-root"></div>
-<script>
+</style></head>
+<body><div id="goffee-table-root"></div><script>
 /* ============================================================================
    Goffee — Pagina "Tavolo" (QR): il cliente sceglie la lingua, legge come
    ordinare (alla cassa) e apre il menù nella lingua scelta.
@@ -92,7 +102,7 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v11/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v12/dist/goffee-logo.png",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
@@ -105,7 +115,9 @@
 
   var T = {
     brandWelcome: "Benvenuto da Goffee",
+    place: "Dervio · Lago di Como",
     chooseLang: "Scegli la lingua · Choose your language · Sprache wählen · Choisir la langue",
+    welcomeWord: { it: "Benvenuto", en: "Welcome", de: "Willkommen", fr: "Bienvenue" },
     howTitle: { it: "Come ordinare", en: "How to order", de: "So bestellst du", fr: "Comment commander" },
     steps: {
       it: [
@@ -152,9 +164,11 @@
     var buttons = LANGS.map(function (l) {
       return '<button type="button" class="gt-lang" data-lang="' + l[0] + '">' +
         '<span class="gt-flag" aria-hidden="true">' + l[2] + '</span>' +
-        '<b>' + esc(l[1]) + '</b><span class="gt-chevron">' + CHEVRON + '</span></button>';
+        '<span class="gt-lang-name">' + esc(l[1]) + '</span>' +
+        '<span class="gt-chevron">' + CHEVRON + '</span></button>';
     }).join("");
     return '<div class="gt-screen gt-choose">' +
+      '<div class="gt-eyebrow">' + esc(T.place) + '</div>' +
       '<h1 class="gt-h1">' + esc(T.brandWelcome) + '</h1>' +
       '<p class="gt-sub">' + esc(T.chooseLang) + '</p>' +
       '<div class="gt-langs" role="group" aria-label="Lingua / Language">' + buttons + '</div>' +
@@ -167,6 +181,7 @@
         '<span class="gt-step-t">' + s + '</span></li>';
     }).join("");
     return '<div class="gt-screen gt-instructions">' +
+      '<div class="gt-eyebrow">' + esc(T.welcomeWord[lang] || T.welcomeWord.it) + '</div>' +
       '<h1 class="gt-h1">' + esc(T.howTitle[lang] || T.howTitle.it) + '</h1>' +
       '<ol class="gt-steps">' + steps + '</ol>' +
       '<a class="gt-btn" href="' + esc(CONFIG.menuUrl) + '">' + esc(T.menuBtn[lang] || T.menuBtn.it) + ' ' + ARROW + '</a>' +
@@ -176,7 +191,7 @@
 
   function render() {
     root.innerHTML =
-      '<div class="gt-wrap">' +
+      '<div class="gt-card">' +
       '<img class="gt-logo" src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria">' +
       chooseScreen() + instructionsScreen() +
       '</div>';
@@ -221,6 +236,4 @@
   window.GoffeeTable = { config: CONFIG, T: T };
 })();
 
-</script>
-</body>
-</html>
+</script></body></html>
