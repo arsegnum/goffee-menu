@@ -34,16 +34,10 @@
 .goffee-table .gt-h1-sub{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:.4em;color:var(--accent);letter-spacing:0;margin-top:.28em;}
 .goffee-table .gt-h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,9vw,3rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 clamp(24px,5vw,32px);color:var(--ink);}
 
-/* --- pizza ritagliata (sfondo trasparente), galleggiante --- */
-.goffee-table .gt-pizza{position:relative;width:clamp(190px,54vw,260px);
-  margin:clamp(22px,5vw,30px) auto clamp(20px,4vw,26px);}
-.goffee-table .gt-pizza img{position:relative;z-index:1;width:100%;height:auto;display:block;
-  animation:gtSpin 48s linear infinite;}
-.goffee-table .gt-pizza::after{content:"";position:absolute;left:50%;bottom:1%;width:64%;height:22px;
-  transform:translateX(-50%);background:radial-gradient(ellipse, rgba(90,45,25,.24), transparent 70%);
-  filter:blur(6px);z-index:0;}
-@keyframes gtSpin{to{transform:rotate(360deg);}}
-@media(prefers-reduced-motion:reduce){.goffee-table .gt-pizza img{animation:none;}}
+/* --- pizza ritagliata (sfondo trasparente), ombra morbida che segue la forma --- */
+.goffee-table .gt-pizza{width:clamp(190px,54vw,260px);margin:clamp(22px,5vw,30px) auto clamp(20px,4vw,26px);}
+.goffee-table .gt-pizza img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 6px 10px rgba(70,38,20,.14)) drop-shadow(0 20px 26px rgba(70,38,20,.22));}
 
 /* --- etichetta "scegli lingua" --- */
 .goffee-table .gt-choose-label{display:flex;align-items:center;gap:14px;margin:0 0 8px;
@@ -102,8 +96,8 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v15/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v15/dist/pizza-cutout.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v16/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v16/dist/pizza-cutout.png",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
