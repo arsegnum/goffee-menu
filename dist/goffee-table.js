@@ -9,8 +9,8 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v18/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v18/dist/pizza-cutout.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v19/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v19/dist/pizza-cutout.png",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
@@ -76,7 +76,7 @@
     }).join("");
     return '<div class="gt-screen gt-choose">' +
       '<div class="gt-eyebrow">' + esc(T.place) + '</div>' +
-      '<h1 class="gt-h1">Benvenuto<span class="gt-h1-sub">da Goffee</span></h1>' +
+      '<h1 class="gt-h1">Benvenuto</h1>' +
       '<div class="gt-pizza"><img src="' + esc(CONFIG.pizzaSrc) + '" alt="Pizza artigianale Goffee"></div>' +
       '<div class="gt-choose-label">' + esc(T.langPick) + '</div>' +
       '<div class="gt-langs" role="group" aria-label="Lingua / Language">' + buttons + '</div>' +
