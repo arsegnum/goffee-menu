@@ -1,0 +1,70 @@
+/* Goffee — Pagina "Tavolo" (QR): scelta lingua → istruzioni → menù.
+   Self-contained, isolato sotto .goffee-table. */
+.goffee-table{
+  --white:#FFFFFF;
+  --ice:#FAFAFA;
+  --ink:#1D1D1F;
+  --muted:#6E6E73;
+  --line:#ECECEC;
+  --accent:#D6452B;
+  --font:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --pad:clamp(22px, 6vw, 40px);
+  min-height:100vh;background:var(--ice);color:var(--ink);
+  font-family:var(--font);font-size:17px;line-height:1.55;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+  display:flex;align-items:flex-start;justify-content:center;padding:clamp(28px,8vw,64px) var(--pad);
+}
+.goffee-table *{box-sizing:border-box;}
+.goffee-table img{max-width:100%;display:block;}
+
+.goffee-table .gt-wrap{width:100%;max-width:520px;text-align:center;}
+.goffee-table .gt-logo{height:46px;width:auto;margin:0 auto clamp(24px,5vw,34px);}
+
+.goffee-table .gt-h1{font-weight:700;font-size:clamp(1.9rem,6.5vw,2.7rem);line-height:1.05;letter-spacing:-.035em;margin:0 0 .35em;color:var(--ink);text-wrap:balance;}
+.goffee-table .gt-sub{color:var(--muted);font-size:.98rem;line-height:1.5;margin:0 auto clamp(26px,5vw,34px);max-width:34ch;text-wrap:pretty;}
+
+/* --- scelta lingua --- */
+.goffee-table .gt-langs{display:flex;flex-direction:column;gap:12px;}
+.goffee-table .gt-lang{
+  appearance:none;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:14px;width:100%;
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:16px 18px;font-size:1.12rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;
+  box-shadow:0 1px 2px rgba(0,0,0,.03);
+  transition:transform .15s cubic-bezier(.2,.7,.3,1), border-color .18s ease, box-shadow .18s ease;
+}
+.goffee-table .gt-lang:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.25);}
+.goffee-table .gt-lang:active{transform:translateY(0);}
+.goffee-table .gt-flag{font-size:1.5rem;line-height:1;flex:none;}
+.goffee-table .gt-lang b{font-weight:500;flex:1;text-align:left;}
+.goffee-table .gt-chevron{color:var(--muted);flex:none;}
+
+/* --- istruzioni --- */
+.goffee-table .gt-steps{list-style:none;margin:0 0 clamp(28px,5vw,36px);padding:0;display:flex;flex-direction:column;gap:2px;text-align:left;}
+.goffee-table .gt-step{display:flex;align-items:flex-start;gap:15px;padding:15px 4px;border-bottom:1px solid var(--line);}
+.goffee-table .gt-step:last-child{border-bottom:none;}
+.goffee-table .gt-step-n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:.98rem;font-weight:600;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
+.goffee-table .gt-step-t{font-size:1.04rem;line-height:1.45;color:var(--ink);padding-top:2px;}
+.goffee-table .gt-step-t b{font-weight:600;}
+
+.goffee-table .gt-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  background:var(--accent);color:#fff;text-decoration:none;
+  font-family:inherit;font-weight:600;font-size:1.08rem;letter-spacing:-.01em;
+  padding:17px 28px;border-radius:980px;border:none;cursor:pointer;
+  transition:filter .18s ease, transform .18s cubic-bezier(.2,.7,.3,1);
+}
+.goffee-table .gt-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.goffee-table .gt-btn:active{transform:translateY(0);}
+.goffee-table .gt-btn svg{display:block;}
+.goffee-table .gt-change{display:inline-block;margin-top:18px;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:.92rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px;}
+.goffee-table .gt-change:hover{color:var(--ink);}
+
+/* --- passi di visibilità --- */
+.goffee-table .gt-screen{animation:gtFade .25s ease;}
+@keyframes gtFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.goffee-table[data-step="lang"] .gt-instructions{display:none;}
+.goffee-table[data-step="instructions"] .gt-choose{display:none;}
+</content>
