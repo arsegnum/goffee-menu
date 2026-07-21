@@ -1,85 +1,84 @@
-/* Goffee — Pagina "Tavolo" (QR): scelta lingua → istruzioni → menù.
-   Design moderno/elegante. Self-contained, isolato sotto .goffee-table. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap');
+/* Goffee — Pagina "Tavolo" (QR) · stile editoriale/serif.
+   Self-contained, isolato sotto .goffee-table. */
 .goffee-table{
-  --white:#FFFFFF;
-  --ink:#221C1A;
-  --muted:#8B837D;
-  --line:#EDE7E2;
+  --paper:#F4EBDD;
+  --ink:#2B211C;
+  --muted:#8C7E70;
+  --line:#E4D8C7;
   --accent:#D6452B;
-  --accent-soft:#F8EAE5;
-  --font:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --accent-ink:#B23A22;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
   min-height:100vh;min-height:100dvh;
-  background:radial-gradient(135% 95% at 50% -12%, #FFFFFF 0%, #FCF7F3 46%, #F3EAE3 100%);
+  background:radial-gradient(125% 100% at 50% 0%, #FCF6EC 0%, #F4EBDD 58%, #EEE2CF 100%);
   color:var(--ink);
-  font-family:var(--font);font-size:17px;line-height:1.55;letter-spacing:-.011em;
+  font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:-.01em;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  display:flex;align-items:center;justify-content:center;
-  padding:clamp(20px,6vw,52px);
-  position:relative;overflow-x:hidden;
+  display:flex;flex-direction:column;
+  padding:clamp(30px,8vw,64px) clamp(24px,7vw,56px);
 }
 .goffee-table *{box-sizing:border-box;}
 .goffee-table img{max-width:100%;display:block;}
-/* bagliore caldo decorativo */
-.goffee-table::before{content:"";position:fixed;left:50%;top:-8%;width:min(560px,92vw);height:340px;
-  transform:translateX(-50%);background:radial-gradient(circle, rgba(214,69,43,.13), transparent 68%);
-  filter:blur(18px);pointer-events:none;z-index:0;}
+.goffee-table .gt-wrap{margin:auto;width:100%;max-width:470px;text-align:center;}
 
-.goffee-table .gt-card{
-  position:relative;z-index:1;width:100%;max-width:440px;text-align:center;
-  background:var(--white);border:1px solid var(--line);border-radius:30px;
-  box-shadow:0 1px 1px rgba(90,45,25,.03), 0 44px 90px -44px rgba(90,45,25,.34), 0 14px 34px -22px rgba(90,45,25,.18);
-  padding:clamp(30px,7vw,44px) clamp(24px,6vw,38px) clamp(26px,6vw,36px);
-}
-.goffee-table .gt-logo{height:38px;width:auto;margin:0 auto clamp(18px,4vw,24px);}
-.goffee-table .gt-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;}
-.goffee-table .gt-h1{font-weight:600;font-size:clamp(1.62rem,5.6vw,2.15rem);line-height:1.1;letter-spacing:-.028em;margin:0 0 .55em;color:var(--ink);text-wrap:balance;}
-.goffee-table .gt-sub{color:var(--muted);font-size:.98rem;line-height:1.5;margin:0 auto clamp(24px,5vw,30px);max-width:30ch;text-wrap:pretty;}
+.goffee-table .gt-logo{height:30px;width:auto;margin:0 auto clamp(20px,5vw,28px);opacity:.9;}
+.goffee-table .gt-eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:14px;}
 
-/* --- scelta lingua --- */
-.goffee-table .gt-langs{display:flex;flex-direction:column;gap:10px;}
-.goffee-table .gt-lang{
-  appearance:none;cursor:pointer;font-family:inherit;
-  display:flex;align-items:center;gap:14px;width:100%;
-  background:var(--white);border:1px solid var(--line);border-radius:16px;padding:12px 15px;
-  transition:transform .16s cubic-bezier(.2,.7,.3,1), border-color .18s ease, box-shadow .18s ease;
-}
-.goffee-table .gt-lang:hover{border-color:rgba(214,69,43,.4);transform:translateY(-2px);box-shadow:0 16px 32px -20px rgba(90,45,25,.45);}
-.goffee-table .gt-lang:active{transform:translateY(0);}
-.goffee-table .gt-flag{width:38px;height:38px;flex:none;border-radius:50%;background:var(--accent-soft);
-  display:flex;align-items:center;justify-content:center;font-size:1.35rem;line-height:1;}
-.goffee-table .gt-lang-name{flex:1;text-align:left;font-size:1.08rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;}
-.goffee-table .gt-chevron{color:var(--muted);flex:none;transition:transform .18s ease, color .18s ease;}
-.goffee-table .gt-lang:hover .gt-chevron{color:var(--accent);transform:translateX(3px);}
+/* --- titoli serif --- */
+.goffee-table .gt-h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.9rem,13vw,4.3rem);line-height:.96;letter-spacing:-.02em;margin:0;color:var(--ink);}
+.goffee-table .gt-h1-sub{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:.4em;color:var(--accent);letter-spacing:0;margin-top:.28em;}
+.goffee-table .gt-h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,9vw,3rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 clamp(24px,5vw,32px);color:var(--ink);}
 
-/* --- istruzioni (timeline) --- */
-.goffee-table .gt-steps{list-style:none;margin:0 0 clamp(24px,5vw,30px);padding:0;text-align:left;}
-.goffee-table .gt-step{position:relative;display:flex;gap:16px;padding:0 0 20px 0;}
-.goffee-table .gt-step:last-child{padding-bottom:2px;}
-.goffee-table .gt-step:not(:last-child)::before{content:"";position:absolute;left:15px;top:32px;bottom:2px;width:2px;
-  transform:translateX(-50%);background:var(--accent-soft);border-radius:2px;}
-.goffee-table .gt-step-n{position:relative;z-index:1;flex:none;width:30px;height:30px;border-radius:50%;
-  background:var(--accent);color:#fff;font-size:.94rem;font-weight:600;display:flex;align-items:center;justify-content:center;
-  font-variant-numeric:tabular-nums;box-shadow:0 5px 12px -4px rgba(214,69,43,.55);}
-.goffee-table .gt-step-t{font-size:1.01rem;line-height:1.5;color:var(--ink);padding-top:3px;}
+/* --- pizza tonda (piatto) --- */
+.goffee-table .gt-pizza{width:clamp(148px,44vw,196px);aspect-ratio:1;margin:clamp(24px,5vw,32px) auto clamp(20px,4vw,26px);
+  border-radius:50%;overflow:hidden;border:6px solid #fff;
+  box-shadow:0 34px 64px -28px rgba(90,45,25,.55), 0 0 0 1px rgba(90,45,25,.06);}
+.goffee-table .gt-pizza img{width:100%;height:100%;object-fit:cover;animation:gtSpin 46s linear infinite;}
+@keyframes gtSpin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.goffee-table .gt-pizza img{animation:none;}}
+
+/* --- etichetta "scegli lingua" --- */
+.goffee-table .gt-choose-label{display:flex;align-items:center;gap:14px;margin:0 0 8px;
+  color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;}
+.goffee-table .gt-choose-label::before,.goffee-table .gt-choose-label::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* --- elenco lingue (stile rivista) --- */
+.goffee-table .gt-langs{display:flex;flex-direction:column;}
+.goffee-table .gt-lang{appearance:none;cursor:pointer;font-family:var(--sans);background:none;border:none;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;width:100%;padding:15px 4px;text-align:left;
+  transition:padding .22s cubic-bezier(.2,.7,.3,1);}
+.goffee-table .gt-lang:first-child{border-top:1px solid var(--line);}
+.goffee-table .gt-flag{font-size:1.32rem;line-height:1;flex:none;width:26px;text-align:center;}
+.goffee-table .gt-lang-name{flex:1;font-family:var(--serif);font-size:1.34rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;transition:color .18s ease;}
+.goffee-table .gt-chevron{color:var(--muted);flex:none;transition:transform .2s ease, color .18s ease;}
+.goffee-table .gt-lang:hover{padding-left:14px;}
+.goffee-table .gt-lang:hover .gt-lang-name{color:var(--accent);}
+.goffee-table .gt-lang:hover .gt-chevron{color:var(--accent);transform:translateX(4px);}
+
+/* --- istruzioni: numeri serif --- */
+.goffee-table .gt-steps{list-style:none;margin:0 0 clamp(26px,5vw,32px);padding:0;text-align:left;}
+.goffee-table .gt-step{display:flex;gap:16px;align-items:baseline;padding:15px 4px;border-bottom:1px solid var(--line);}
+.goffee-table .gt-step:first-child{border-top:1px solid var(--line);}
+.goffee-table .gt-step-n{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.7rem;color:var(--accent);flex:none;width:30px;line-height:1;}
+.goffee-table .gt-step-t{font-family:var(--sans);font-size:1.01rem;line-height:1.5;color:var(--ink);}
 .goffee-table .gt-step-t b{font-weight:600;}
 
-.goffee-table .gt-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
-  background:var(--accent);color:#fff;text-decoration:none;font-family:inherit;font-weight:600;font-size:1.06rem;
-  letter-spacing:-.01em;padding:16px 26px;border-radius:999px;border:none;cursor:pointer;
-  box-shadow:0 14px 30px -12px rgba(214,69,43,.6);
-  transition:transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s ease, filter .18s ease;
-}
-.goffee-table .gt-btn:hover{transform:translateY(-2px);box-shadow:0 22px 42px -14px rgba(214,69,43,.65);filter:brightness(1.03);}
+/* --- pulsante + cambio lingua --- */
+.goffee-table .gt-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  background:var(--accent);color:#fff;text-decoration:none;font-family:var(--sans);font-weight:600;font-size:1.06rem;letter-spacing:-.01em;
+  padding:16px 26px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 16px 32px -14px rgba(214,69,43,.6);
+  transition:transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s ease, filter .18s ease;}
+.goffee-table .gt-btn:hover{transform:translateY(-2px);box-shadow:0 24px 44px -16px rgba(214,69,43,.65);filter:brightness(1.03);}
 .goffee-table .gt-btn:active{transform:translateY(0);}
 .goffee-table .gt-btn svg{display:block;}
-.goffee-table .gt-change{display:inline-block;margin-top:16px;background:none;border:none;cursor:pointer;
-  font-family:inherit;font-size:.9rem;color:var(--muted);padding:8px;border-radius:8px;transition:color .18s ease;}
+.goffee-table .gt-change{display:inline-block;margin-top:16px;background:none;border:none;cursor:pointer;font-family:var(--sans);
+  font-size:.9rem;color:var(--muted);padding:8px;border-radius:8px;transition:color .18s ease;}
 .goffee-table .gt-change:hover{color:var(--accent);}
 
 /* --- transizioni tra passi --- */
-.goffee-table .gt-screen{animation:gtFade .3s cubic-bezier(.2,.7,.3,1);}
-@keyframes gtFade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.goffee-table .gt-screen{animation:gtFade .34s cubic-bezier(.2,.7,.3,1);}
+@keyframes gtFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
 @media(prefers-reduced-motion:reduce){.goffee-table .gt-screen{animation:none;}}
 .goffee-table[data-step="lang"] .gt-instructions{display:none;}
 .goffee-table[data-step="instructions"] .gt-choose{display:none;}

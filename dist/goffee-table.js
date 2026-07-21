@@ -9,7 +9,8 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v12/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v13/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v13/dist/pizza-top.jpg",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
@@ -21,9 +22,8 @@
   ];
 
   var T = {
-    brandWelcome: "Benvenuto da Goffee",
     place: "Dervio · Lago di Como",
-    chooseLang: "Scegli la lingua · Choose your language · Sprache wählen · Choisir la langue",
+    langPick: "Lingua · Language · Sprache · Langue",
     welcomeWord: { it: "Benvenuto", en: "Welcome", de: "Willkommen", fr: "Bienvenue" },
     howTitle: { it: "Come ordinare", en: "How to order", de: "So bestellst du", fr: "Comment commander" },
     steps: {
@@ -76,8 +76,9 @@
     }).join("");
     return '<div class="gt-screen gt-choose">' +
       '<div class="gt-eyebrow">' + esc(T.place) + '</div>' +
-      '<h1 class="gt-h1">' + esc(T.brandWelcome) + '</h1>' +
-      '<p class="gt-sub">' + esc(T.chooseLang) + '</p>' +
+      '<h1 class="gt-h1">Benvenuto<span class="gt-h1-sub">da Goffee</span></h1>' +
+      '<div class="gt-pizza"><img src="' + esc(CONFIG.pizzaSrc) + '" alt="Pizza artigianale Goffee"></div>' +
+      '<div class="gt-choose-label">' + esc(T.langPick) + '</div>' +
       '<div class="gt-langs" role="group" aria-label="Lingua / Language">' + buttons + '</div>' +
       '</div>';
   }
@@ -89,7 +90,7 @@
     }).join("");
     return '<div class="gt-screen gt-instructions">' +
       '<div class="gt-eyebrow">' + esc(T.welcomeWord[lang] || T.welcomeWord.it) + '</div>' +
-      '<h1 class="gt-h1">' + esc(T.howTitle[lang] || T.howTitle.it) + '</h1>' +
+      '<h2 class="gt-h2">' + esc(T.howTitle[lang] || T.howTitle.it) + '</h2>' +
       '<ol class="gt-steps">' + steps + '</ol>' +
       '<a class="gt-btn" href="' + esc(CONFIG.menuUrl) + '">' + esc(T.menuBtn[lang] || T.menuBtn.it) + ' ' + ARROW + '</a>' +
       '<button type="button" class="gt-change">' + esc(T.changeLang[lang] || T.changeLang.it) + '</button>' +
@@ -98,7 +99,7 @@
 
   function render() {
     root.innerHTML =
-      '<div class="gt-card">' +
+      '<div class="gt-wrap">' +
       '<img class="gt-logo" src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria">' +
       chooseScreen() + instructionsScreen() +
       '</div>';
