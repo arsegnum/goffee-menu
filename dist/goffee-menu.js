@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v9/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v20/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -158,6 +158,7 @@
         drinkKicker: "Da bere",
         allergTop: "Le nostre proposte potrebbero contenere allergeni. In caso di intolleranze, ti preghiamo di comunicarlo al momento dell'ordine.",
         allergMore: "Maggiori informazioni",
+      dineNote: "Al tavolo: ordina e paga <b>alla cassa</b> indicando <b>nome e numero del tavolo</b>. Al cibo pensiamo noi; le bevande le ritiri tu.",
         freshNote: "Alcuni ingredienti freschi sono serviti a parte, da aggiungere a casa per gustarli al meglio.",
         allergIntro: "Accanto a ciascun prodotto trovi un numero che indica il tipo di allergene presente.",
         notePrezzi: "Tutti i prezzi sono espressi in euro (€).",
@@ -178,6 +179,7 @@
         drinkKicker: "To drink",
         allergTop: "Our dishes may contain allergens. If you have any intolerances, please let us know when ordering.",
         allergMore: "More information",
+      dineNote: "Dining in? Order and pay <b>at the counter</b> with your <b>name and table number</b>. We bring the food to you; drinks are collected by you.",
         freshNote: "Some fresh ingredients are served separately, to add at home so you enjoy them at their best.",
         allergIntro: "Next to each item you'll find a number indicating the allergen present.",
         notePrezzi: "All prices are in euros (€).",
@@ -198,6 +200,7 @@
         drinkKicker: "Zum Trinken",
         allergTop: "Unsere Gerichte können Allergene enthalten. Bei Unverträglichkeiten teile es uns bitte bei der Bestellung mit.",
         allergMore: "Mehr Informationen",
+      dineNote: "Am Tisch? Bestelle und zahle <b>an der Kasse</b> mit <b>Namen und Tischnummer</b>. Das Essen bringen wir dir; Getränke holst du selbst.",
         freshNote: "Einige frische Zutaten werden separat serviert, um sie zu Hause hinzuzufügen und in bester Qualität zu genießen.",
         allergIntro: "Neben jedem Produkt findest du eine Nummer, die das enthaltene Allergen angibt.",
         notePrezzi: "Alle Preise verstehen sich in Euro (€).",
@@ -218,6 +221,7 @@
         drinkKicker: "À boire",
         allergTop: "Nos propositions peuvent contenir des allergènes. En cas d'intolérances, merci de nous le signaler au moment de la commande.",
         allergMore: "Plus d'informations",
+      dineNote: "À table ? Commandez et payez <b>à la caisse</b> avec <b>nom et numéro de table</b>. On vous apporte les plats ; les boissons sont à récupérer.",
         freshNote: "Certains ingrédients frais sont servis à part, à ajouter à la maison pour les savourer au mieux.",
         allergIntro: "À côté de chaque produit figure un numéro indiquant l'allergène présent.",
         notePrezzi: "Tous les prix sont indiqués en euros (€).",
@@ -324,6 +328,14 @@
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>';
   var FB_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5.5H14c-2 0-3.5 1.5-3.5 3.5v2H8v3h2.5V21h3v-7H16l.5-3h-3V9.2c0-.4.3-.7.7-.7Z" fill="currentColor"/></svg>';
+  var DINE_SVG =
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3v6a2 2 0 0 0 2 2M8 3v18M6 3v4M18 3c-1.7 0-2.8 1.6-2.8 4.2 0 2.2 1 3.6 2.3 4V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // Fascia informativa: come ordinare quando si è seduti al tavolo (alla cassa).
+  function dineBand(ui) {
+    return '<div class="dine-note"><div class="dine-note__in">' + DINE_SVG +
+      '<span>' + ui.dineNote + '</span></div></div>';
+  }
 
   function esc(s) {
     return String(s)
@@ -540,6 +552,7 @@
       snav() +
       '<div class="page" data-card="' + CONFIG.card + '" style="--accent:' + CONFIG.accent + '">' +
       hero(CONFIG.hero, ui) +
+      dineBand(ui) +
       '<div class="block allerg-top" data-tone="white"><div class="block__inner"><p>' +
       esc(ui.allergTop) + ' <a href="#note" class="allerg-more">' + esc(ui.allergMore) + '</a></p></div></div>' +
       sections +
