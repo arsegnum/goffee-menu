@@ -225,7 +225,8 @@
 .goffee-menu .dine-step{display:flex;align-items:center;gap:11px;text-align:left;}
 .goffee-menu .dine-ic{flex:none;width:36px;height:36px;border-radius:50%;
   background:color-mix(in srgb, var(--accent) 12%, var(--white));color:var(--accent);
-  display:flex;align-items:center;justify-content:center;}
+  display:flex;align-items:center;justify-content:center;line-height:0;}
+.goffee-menu .dine-ic svg{display:block;}
 .goffee-menu .dine-step p{margin:0;line-height:1.3;}
 .goffee-menu .dine-step b{display:block;font-weight:600;font-size:.94rem;color:var(--ink);letter-spacing:-.01em;}
 .goffee-menu .dine-step span{display:block;font-size:.82rem;color:var(--muted);}
