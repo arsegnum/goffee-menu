@@ -30,19 +30,14 @@ nella lingua scelta. Niente ordinazione online qui.
 ⚠️ Perché lo scan funzioni, la pagina **`/tavolo` dev'essere pubblicata su
 `www.pizzeriagoffee.it`**. Se cambi di nuovo dominio/slug, il QR va rigenerato: dimmelo.
 
-## 3) Volantino A6 da stampare
+## 3) Card da tavolo (con numero del tavolo)
 
-`goffee-a6.html` è il volantino pronto (105×148 mm) con logo + QR + testo, tutto
-incorporato (funziona anche offline).
+Ogni tavolo ha la sua card con il **numero** (il cliente lo dice alla cassa) + il QR.
+Niente logo (sul tavolo si sa dove si è). Il QR è lo stesso per tutti (porta a `/tavolo`).
 
-Per stamparlo: apri `goffee-a6.html` nel browser → **Stampa** (Cmd/Ctrl+P) → formato
-**A6**, margini **Nessuno** → Stampa o "Salva come PDF". Un foglio = un tavolo (stampane
-quanti te ne servono). Se preferisci un altro formato (es. A5 o due A6 per foglio A4),
-te lo preparo.
+- `goffee-tavoli-a4.html` — **4 card per foglio A4** (3 fogli = 12 tavoli), con linee di taglio. Consigliato: meno carta.
+- `goffee-tavoli-a6.html` — **una card A6 intera per pagina** (12 pagine = 12 tavoli).
 
-## File
-- `goffee-table.css` / `goffee-table.js` — la pagina (embed Webflow)
-- `goffee-table.html` — anteprima locale
-- `goffee-qr.svg` / `goffee-qr.png` — il codice QR
-- `goffee-a6.html` — volantino A6 pronto da stampare
-</content>
+Stampa: Cmd/Ctrl+P → formato indicato (A4 o A6), scala 100%, margini Predefiniti.
+Per cambiare il numero di tavoli, dimmelo e rigenero.
+
