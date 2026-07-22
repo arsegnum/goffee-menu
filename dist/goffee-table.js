@@ -9,7 +9,7 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v20/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v26/dist/goffee-logo.png",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
