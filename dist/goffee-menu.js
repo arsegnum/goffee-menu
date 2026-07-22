@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v25/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -29,6 +29,10 @@
     heroBg: "hero-pizza.jpg",        // usato solo se hero === "sfondo"
     storageKey: "goffee-lang",
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
+    // Dati aziendali (ragione sociale + P.IVA) e link privacy. Compila legalInfo con i tuoi dati.
+    // Override da snippet: data-legal="…" e data-privacy-url="/privacy".
+    legalInfo: "",
+    privacyUrl: "/privacy",
     instagram: "#",
     facebook: "#",
     // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
@@ -533,7 +537,8 @@
       '<div><span>' + esc(ui.dinner) + '</span><b>' + esc(CONFIG.hours.dinner) + '</b></div>' +
       '<div><span>' + esc(ui.rest) + '</span><b>' + esc(ui.closed) + '</b></div></div>' +
       ctaRow(ui) + '</div>' +
-      '<div class="foot-legal"><small>' + esc(CONFIG.legal) + '</small>' +
+      '<div class="foot-legal"><small>' + esc(CONFIG.legal) + (CONFIG.legalInfo ? ' · ' + esc(CONFIG.legalInfo) : '') +
+      ' · <a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + IG_SVG + '</a>' +
       '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + FB_SVG + '</a>' +
@@ -726,6 +731,8 @@
     if (d.lunch) CONFIG.hours.lunch = d.lunch;
     if (d.dinner) CONFIG.hours.dinner = d.dinner;
     if (d.address) CONFIG.address = d.address;
+    if (d.legal) CONFIG.legalInfo = d.legal;
+    if (d.privacyUrl) CONFIG.privacyUrl = d.privacyUrl;
     root.classList.add("goffee-menu");
     currentLang = readLang();
     document.documentElement.lang = currentLang;

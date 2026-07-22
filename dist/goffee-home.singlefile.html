@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="it"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Goffee — Pizzeria artigianale · Dervio, Lago di Como</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}body{margin:0;}
@@ -137,6 +134,8 @@
 .goffee-home .foot-cta{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;}
 .goffee-home .foot-legal{max-width:var(--maxw);margin:clamp(40px,5vw,60px) auto 0;padding:clamp(24px,3vw,30px) var(--pad) clamp(40px,6vw,64px);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;text-align:left;}
 .goffee-home .foot-legal small{color:var(--muted);font-size:.84rem;}
+.goffee-home .foot-legal .foot-link{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);white-space:nowrap;transition:color .18s ease,border-color .18s ease;}
+.goffee-home .foot-legal .foot-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
 .goffee-home .foot-social{display:flex;gap:10px;}
 .goffee-home .foot-social a{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:border-color .2s ease, color .2s ease;}
 .goffee-home .foot-social a:hover{border-color:var(--accent);color:var(--accent);}
@@ -180,11 +179,7 @@
   .goffee-home .reveal.in{opacity:1;transform:none;}
 }
 </content>
-</style>
-</head>
-<body>
-<div id="goffee-home-root"></div>
-<script>
+</style></head><body><div id="goffee-home-root"></div><script>
 /* ============================================================================
    Goffee — Home · versione production self-contained (vanilla JS, 0 dipendenze)
    Ricostruisce fedelmente "Home Goffee.html": navbar + hero (foto pizza) +
@@ -201,12 +196,16 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00", closed: "Lunedì chiuso" },
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
+    // Dati aziendali (ragione sociale + P.IVA) e link privacy. Compila legalInfo con i tuoi dati.
+    // Si possono impostare anche da snippet: data-legal="…" e data-privacy-url="/privacy".
+    legalInfo: "",
+    privacyUrl: "/privacy",
     instagram: "#",
     facebook: "#",
     // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
@@ -333,7 +332,8 @@
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
       '</div></div>' +
       '<div class="foot-legal">' +
-      '<small>' + esc(CONFIG.legal) + '</small>' +
+      '<small>' + esc(CONFIG.legal) + (CONFIG.legalInfo ? ' · ' + esc(CONFIG.legalInfo) : '') +
+      ' · <a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + ICON.instagram + '</a>' +
       '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + ICON.facebook + '</a>' +
@@ -396,6 +396,8 @@
     if (d.dinner) CONFIG.hours.dinner = d.dinner;
     if (d.closed) CONFIG.hours.closed = d.closed;
     if (d.address) CONFIG.address = d.address;
+    if (d.legal) CONFIG.legalInfo = d.legal;
+    if (d.privacyUrl) CONFIG.privacyUrl = d.privacyUrl;
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer() + orderModal();
     wire(root);
@@ -426,6 +428,4 @@
   window.GoffeeHome = { config: CONFIG, teaser: TEASER };
 })();
 
-</script>
-</body>
-</html>
+</script></body></html>

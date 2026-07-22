@@ -14,12 +14,16 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v10/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00", closed: "Lunedì chiuso" },
     legal: "© 2026 Goffee - Pizzeria. Tutti i diritti riservati. Fatto con ❤️ e tanta farina.",
+    // Dati aziendali (ragione sociale + P.IVA) e link privacy. Compila legalInfo con i tuoi dati.
+    // Si possono impostare anche da snippet: data-legal="…" e data-privacy-url="/privacy".
+    legalInfo: "",
+    privacyUrl: "/privacy",
     instagram: "#",
     facebook: "#",
     // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
@@ -146,7 +150,8 @@
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
       '</div></div>' +
       '<div class="foot-legal">' +
-      '<small>' + esc(CONFIG.legal) + '</small>' +
+      '<small>' + esc(CONFIG.legal) + (CONFIG.legalInfo ? ' · ' + esc(CONFIG.legalInfo) : '') +
+      ' · <a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + ICON.instagram + '</a>' +
       '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + ICON.facebook + '</a>' +
@@ -209,6 +214,8 @@
     if (d.dinner) CONFIG.hours.dinner = d.dinner;
     if (d.closed) CONFIG.hours.closed = d.closed;
     if (d.address) CONFIG.address = d.address;
+    if (d.legal) CONFIG.legalInfo = d.legal;
+    if (d.privacyUrl) CONFIG.privacyUrl = d.privacyUrl;
     root.classList.add("goffee-home");
     root.innerHTML = navbar() + hero() + teaser() + footer() + orderModal();
     wire(root);
