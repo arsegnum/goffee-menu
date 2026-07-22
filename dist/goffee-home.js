@@ -14,8 +14,8 @@
     // Indirizzo della pagina Menù sul tuo sito Webflow.
     // Si può anche impostare nello snippet: <div id="goffee-home-root" data-menu-url="/menu">
     menuUrl: "/menu",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/goffee-logo.png",
-    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/pizza-top.jpg",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v28/dist/goffee-logo.png",
+    pizzaSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v28/dist/pizza-top.jpg",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     mapsUrl: "https://maps.google.com/?q=Via+Martiri+della+Liberazione+20+Dervio",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00", closed: "Lunedì chiuso" },
@@ -150,8 +150,11 @@
       '<a class="btn btn--lg btn--ghost" href="' + esc(CONFIG.mapsUrl) + '" target="_blank" rel="noopener">Indicazioni</a>' +
       '</div></div>' +
       '<div class="foot-legal">' +
-      '<small>' + esc(CONFIG.legal) + (CONFIG.legalInfo ? ' · ' + esc(CONFIG.legalInfo) : '') +
-      ' · <a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
+      '<div class="foot-legal-txt">' +
+      '<small>' + esc(CONFIG.legal) + '</small>' +
+      '<small class="foot-biz">' + (CONFIG.legalInfo ? esc(CONFIG.legalInfo) + ' · ' : '') +
+      '<a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
+      '</div>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + ICON.instagram + '</a>' +
       '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + ICON.facebook + '</a>' +

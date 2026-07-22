@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v27/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v28/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -537,8 +537,10 @@
       '<div><span>' + esc(ui.dinner) + '</span><b>' + esc(CONFIG.hours.dinner) + '</b></div>' +
       '<div><span>' + esc(ui.rest) + '</span><b>' + esc(ui.closed) + '</b></div></div>' +
       ctaRow(ui) + '</div>' +
-      '<div class="foot-legal"><small>' + esc(CONFIG.legal) + (CONFIG.legalInfo ? ' · ' + esc(CONFIG.legalInfo) : '') +
-      ' · <a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small>' +
+      '<div class="foot-legal"><div class="foot-legal-txt">' +
+      '<small>' + esc(CONFIG.legal) + '</small>' +
+      '<small class="foot-biz">' + (CONFIG.legalInfo ? esc(CONFIG.legalInfo) + ' · ' : '') +
+      '<a class="foot-link" href="' + esc(CONFIG.privacyUrl) + '">Privacy</a></small></div>' +
       '<div class="foot-social">' +
       '<a href="' + esc(CONFIG.instagram) + '" aria-label="Instagram">' + IG_SVG + '</a>' +
       '<a href="' + esc(CONFIG.facebook) + '" aria-label="Facebook">' + FB_SVG + '</a>' +

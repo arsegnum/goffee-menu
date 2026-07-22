@@ -128,7 +128,9 @@
 .goffee-home .foot-hours b{font-size:1.08rem;color:var(--ink);font-weight:600;letter-spacing:-.01em;}
 .goffee-home .foot-cta{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;}
 .goffee-home .foot-legal{max-width:var(--maxw);margin:clamp(40px,5vw,60px) auto 0;padding:clamp(24px,3vw,30px) var(--pad) clamp(40px,6vw,64px);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;text-align:left;}
+.goffee-home .foot-legal-txt{display:flex;flex-direction:column;gap:5px;min-width:0;}
 .goffee-home .foot-legal small{color:var(--muted);font-size:.84rem;}
+.goffee-home .foot-legal .foot-biz{font-size:.76rem;color:var(--muted);opacity:.8;}
 .goffee-home .foot-legal .foot-link{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);white-space:nowrap;transition:color .18s ease,border-color .18s ease;}
 .goffee-home .foot-legal .foot-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
 .goffee-home .foot-social{display:flex;gap:10px;}
