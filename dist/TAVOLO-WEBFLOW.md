@@ -36,6 +36,7 @@ Ogni tavolo ha la sua card con il **numero** (il cliente lo dice alla cassa) + i
 Niente logo (sul tavolo si sa dove si è). Il QR è lo stesso per tutti (porta a `/tavolo`).
 
 - `goffee-tavoli-a4.html` — **4 card per foglio A4** (3 fogli = 12 tavoli), con linee di taglio. Consigliato: meno carta.
+- `goffee-tavoli-a4-a6.html` — **A6 esatto tagliando da A4**: 4 card a filo pagina (105×148,5 mm). Stampa da **Chrome**, A4, scala 100%, margini **Nessuno**, spunta **Grafica in background**; taglia a metà in verticale e orizzontale.
 - `goffee-tavoli-a6.html` — **una card A6 intera per pagina** (12 pagine = 12 tavoli).
 
 Stampa: Cmd/Ctrl+P → formato indicato (A4 o A6), scala 100%, margini Predefiniti.
