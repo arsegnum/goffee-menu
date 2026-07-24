@@ -317,8 +317,9 @@
 .goffee-menu .gfilter-count{font-variant-numeric:tabular-nums;opacity:.75;font-size:.82em;}
 @media(max-width:560px){
   .goffee-menu .gfilter__in{gap:10px 12px;}
-  .goffee-menu .gfilter__chips{width:100%;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:none;}
-  .goffee-menu .gfilter__chips::-webkit-scrollbar{display:none;}
+  /* i chip vanno a capo (tutti visibili, incluso "Preferiti") invece di scorrere */
+  .goffee-menu .gfilter__chips{width:100%;flex-wrap:wrap;}
+  .goffee-menu .gfilter-chip{padding:8px 13px;font-size:.88rem;}
 }
 
 /* ---------- CUORE PREFERITI SUL PIATTO ---------- */
