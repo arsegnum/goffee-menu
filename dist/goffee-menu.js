@@ -37,9 +37,10 @@
     facebook: "#",
     // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
     orderUrl: "https://www.foodbooking.com/api/fb/_q_jn_z_v",
-    // Link recensione Google. Default: apre la scheda dell'attività (nome+paese).
-    // Metti il link diretto "scrivi recensione" con data-review-url="…" sullo snippet.
-    reviewUrl: "https://www.google.com/maps/search/?api=1&query=Goffee%20Pizzeria%20Dervio",
+    // Link recensione Google. Default: scheda ESATTA di Goffee via CID (identificatore
+    // canonico Google della scheda). Per aprire direttamente la finestra recensione,
+    // metti il link "scrivi recensione" (g.page/r/…/review) con data-review-url="…".
+    reviewUrl: "https://www.google.com/maps?cid=17017661356589761011",
     glfLabel: "Vedi Menu & Ordina",
     glfNavLabel: "Ordina ora"
   };
