@@ -19,7 +19,7 @@
 .goffee-menu *{box-sizing:border-box;}
 .goffee-menu strong{font-weight:600;}
 .goffee-menu .page{min-height:100vh;}
-.goffee-menu section[id], .goffee-menu header[id]{scroll-margin-top:64px;}
+.goffee-menu section[id], .goffee-menu header[id]{scroll-margin-top:120px;}
 
 /* ---------- BANDS ---------- */
 .goffee-menu .block{background:var(--white);}
@@ -272,5 +272,60 @@
 .goffee-menu .foot-social a:hover{border-color:var(--accent);color:var(--accent);}
 .goffee-menu .foot-social svg{display:block;}
 @media(max-width:560px){.goffee-menu .foot-legal{justify-content:center;text-align:center;}}
-</content>
-</invoke>
+
+/* ---------- UTILITY ---------- */
+.goffee-menu .is-hidden{display:none !important;}
+.goffee-menu [hidden]{display:none !important;}
+
+/* ---------- BADGE "SEI AL TAVOLO" ---------- */
+.goffee-menu .dine-table{display:inline-flex;align-items:center;gap:9px;margin:0 0 16px;padding:9px 18px;border-radius:980px;
+  background:var(--accent);color:#fff;font-weight:600;font-size:.96rem;letter-spacing:-.01em;
+  box-shadow:0 10px 24px -12px color-mix(in srgb,var(--accent) 70%,#000);}
+.goffee-menu .dine-table__ic{font-size:1.05rem;line-height:1;}
+.goffee-menu .dine-table b{font-weight:700;font-size:1.08rem;margin-left:1px;}
+
+/* ---------- BARRA RICERCA + FILTRI ---------- */
+.goffee-menu .gfilter{position:sticky;top:64px;z-index:55;background:color-mix(in srgb,var(--white) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line);}
+.goffee-menu .gfilter__in{max-width:var(--maxw);margin:0 auto;padding:12px var(--pad);display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;}
+.goffee-menu .gfilter__search{position:relative;display:flex;align-items:center;flex:1 1 240px;min-width:190px;}
+.goffee-menu .gfilter__ic{position:absolute;left:15px;color:var(--muted);pointer-events:none;}
+.goffee-menu .gfilter__input{width:100%;font-family:var(--font);font-size:1rem;color:var(--ink);letter-spacing:-.01em;
+  background:var(--ice);border:1px solid var(--line);border-radius:980px;padding:11px 40px 11px 44px;outline:none;
+  -webkit-appearance:none;appearance:none;transition:border-color .18s ease,background .18s ease;}
+.goffee-menu .gfilter__input::placeholder{color:var(--muted);}
+.goffee-menu .gfilter__input:focus{border-color:var(--accent);background:var(--white);}
+.goffee-menu .gfilter__input::-webkit-search-decoration,.goffee-menu .gfilter__input::-webkit-search-cancel-button{-webkit-appearance:none;}
+.goffee-menu .gfilter__clear{position:absolute;right:9px;width:26px;height:26px;border:none;padding:0;cursor:pointer;
+  background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--muted);border-radius:50%;font-size:1.15rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:background .16s ease,color .16s ease;}
+.goffee-menu .gfilter__clear:hover{background:color-mix(in srgb,var(--ink) 14%,transparent);color:var(--ink);}
+.goffee-menu .gfilter__chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.goffee-menu .gfilter-chip{font-family:var(--font);font-size:.9rem;font-weight:500;letter-spacing:-.005em;color:var(--muted);
+  background:var(--white);border:1px solid var(--line);border-radius:980px;padding:9px 15px;cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:6px;transition:border-color .16s ease,color .16s ease,background .16s ease;}
+.goffee-menu .gfilter-chip:hover{border-color:var(--ink);color:var(--ink);}
+.goffee-menu .gfilter-chip--active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.goffee-menu .gfilter-chip--active:hover{color:#fff;}
+.goffee-menu .gfilter-heart{color:var(--accent);font-size:.95em;}
+.goffee-menu .gfilter-chip--active .gfilter-heart{color:#fff;}
+.goffee-menu .gfilter-count{font-variant-numeric:tabular-nums;opacity:.75;font-size:.82em;}
+@media(max-width:560px){
+  .goffee-menu .gfilter__in{gap:10px 12px;}
+  .goffee-menu .gfilter__chips{width:100%;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:none;}
+  .goffee-menu .gfilter__chips::-webkit-scrollbar{display:none;}
+}
+
+/* ---------- CUORE PREFERITI SUL PIATTO ---------- */
+.goffee-menu .dish-head__r{display:inline-flex;align-items:center;gap:10px;flex:none;align-self:baseline;}
+.goffee-menu .dish-fav{-webkit-appearance:none;appearance:none;background:none;border:none;cursor:pointer;padding:3px;line-height:0;
+  color:var(--muted);opacity:.5;border-radius:50%;transition:color .16s ease,opacity .16s ease,transform .16s cubic-bezier(.2,.7,.3,1);}
+.goffee-menu .dish-fav:hover{opacity:1;color:var(--accent);}
+.goffee-menu .dish-fav.is-fav{opacity:1;color:var(--accent);}
+.goffee-menu .dish-fav.is-fav svg path{fill:var(--accent);stroke:var(--accent);}
+.goffee-menu .dish-fav:active{transform:scale(.85);}
+.goffee-menu .dish-fav svg{display:block;}
+
+/* ---------- NESSUN RISULTATO ---------- */
+.goffee-menu .gfilter-empty .block__inner{padding-top:clamp(48px,8vw,80px);padding-bottom:clamp(48px,8vw,80px);text-align:center;}
+.goffee-menu .gfilter-empty p{margin:0;color:var(--muted);font-size:1.05rem;}

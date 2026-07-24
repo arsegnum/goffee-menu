@@ -20,7 +20,7 @@
     tel: "0341 851178",              // telefono mostrato e usato per tel:
     // Indirizzo della home sul sito (per i link "Home" / brand / "Dove siamo" della navbar).
     homeUrl: "/",
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v29/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v30/dist/goffee-logo.png",
     address: "Via Martiri della Liberazione 20 · Dervio (LC)",
     hours: { lunch: "11:30 – 14:00", dinner: "18:00 – 22:00" },
     card: "linee",                   // carte | linee | spaziate
@@ -162,6 +162,8 @@
         drinkKicker: "Da bere",
         allergTop: "Le nostre proposte potrebbero contenere allergeni. In caso di intolleranze, ti preghiamo di comunicarlo al momento dell'ordine.",
         allergMore: "Maggiori informazioni",
+        tableLabel: "Sei al tavolo",
+        filter: { placeholder: "Cerca una pizza…", all: "Tutte", veg: "Vegetariane", spicy: "Piccanti", fav: "Preferiti", none: "Nessun risultato. Prova con un'altra ricerca.", clear: "Cancella" },
       dineTitle: "Come funziona il servizio al tavolo",
       dineSteps: [["Ordina alla cassa", "con nome e numero del tavolo"], ["Alle pizze ci pensiamo noi", "te le portiamo al tavolo"], ["Le bevande", "le ritiri al banco"]],
         freshNote: "Alcuni ingredienti freschi sono serviti a parte, da aggiungere a casa per gustarli al meglio.",
@@ -184,6 +186,8 @@
         drinkKicker: "To drink",
         allergTop: "Our dishes may contain allergens. If you have any intolerances, please let us know when ordering.",
         allergMore: "More information",
+        tableLabel: "You're at table",
+        filter: { placeholder: "Search a pizza…", all: "All", veg: "Vegetarian", spicy: "Spicy", fav: "Favourites", none: "No results. Try another search.", clear: "Clear" },
       dineTitle: "How table service works",
       dineSteps: [["Order at the counter", "with your name and table number"], ["Leave the pizzas to us", "we bring them to your table"], ["Drinks", "collect them at the counter"]],
         freshNote: "Some fresh ingredients are served separately, to add at home so you enjoy them at their best.",
@@ -206,6 +210,8 @@
         drinkKicker: "Zum Trinken",
         allergTop: "Unsere Gerichte können Allergene enthalten. Bei Unverträglichkeiten teile es uns bitte bei der Bestellung mit.",
         allergMore: "Mehr Informationen",
+        tableLabel: "Du sitzt an Tisch",
+        filter: { placeholder: "Pizza suchen…", all: "Alle", veg: "Vegetarisch", spicy: "Scharf", fav: "Favoriten", none: "Keine Ergebnisse. Versuch eine andere Suche.", clear: "Löschen" },
       dineTitle: "So funktioniert der Tischservice",
       dineSteps: [["An der Kasse bestellen", "mit Name und Tischnummer"], ["Um die Pizzen kümmern wir uns", "wir bringen sie an den Tisch"], ["Getränke", "an der Theke abholen"]],
         freshNote: "Einige frische Zutaten werden separat serviert, um sie zu Hause hinzuzufügen und in bester Qualität zu genießen.",
@@ -228,6 +234,8 @@
         drinkKicker: "À boire",
         allergTop: "Nos propositions peuvent contenir des allergènes. En cas d'intolérances, merci de nous le signaler au moment de la commande.",
         allergMore: "Plus d'informations",
+        tableLabel: "Vous êtes à la table",
+        filter: { placeholder: "Rechercher une pizza…", all: "Toutes", veg: "Végétariennes", spicy: "Épicées", fav: "Favoris", none: "Aucun résultat. Essayez une autre recherche.", clear: "Effacer" },
       dineTitle: "Comment fonctionne le service à table",
       dineSteps: [["Commandez à la caisse", "avec nom et numéro de table"], ["Les pizzas, on s'en occupe", "on vous les apporte à table"], ["Boissons", "à récupérer au comptoir"]],
         freshNote: "Certains ingrédients frais sont servis à part, à ajouter à la maison pour les savourer au mieux.",
@@ -345,13 +353,48 @@
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4.5h10l-1 14.2a1.6 1.6 0 0 1-1.6 1.5H9.6A1.6 1.6 0 0 1 8 18.7L7 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.4 9h9.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
   ];
 
+  var SEARCH_SVG =
+    '<svg class="gfilter__ic" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  var HEART_SVG =
+    '<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 12.9a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9a4.6 4.6 0 1 1 6.5 6.5L12 20.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+
+  // Riconoscimento tag (vegetariana / piccante) da nome+ingredienti in italiano.
+  // Override espliciti possibili dal Foglio Google: colonne veg / piccante (true/false).
+  var MEAT_RE = /w[üu]rstel|prosciutt|\bcotto\b|\bcrudo\b|salsicc|spianata|pancett|speck|bresaol|mortadell|nduja|salame|guancial|acciugh|tonno|salmon|\bpesce\b|carne|pollo|\bwurst\b|porchett|salumi/i;
+  var SPICY_RE = /piccant|diavol|nduja|peperoncin|messican|arrabbiat/i;
+  function deriveTags(item) {
+    var hay = (item.n + " " + (item.d || "")).toLowerCase();
+    return {
+      veg: (typeof item.veg === "boolean") ? item.veg : !MEAT_RE.test(hay),
+      spicy: (typeof item.spicy === "boolean") ? item.spicy : SPICY_RE.test(hay)
+    };
+  }
+
+  /* --------------------------- PREFERITI ---------------------------------- */
+  var favSet = [];
+  function readFavs() {
+    try { var a = JSON.parse(localStorage.getItem("goffee-fav") || "[]"); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function saveFavs() { try { localStorage.setItem("goffee-fav", JSON.stringify(favSet)); } catch (e) {} }
+  function isFav(n) { return favSet.indexOf(n) !== -1; }
+  function toggleFav(n) {
+    var i = favSet.indexOf(n);
+    if (i === -1) favSet.push(n); else favSet.splice(i, 1);
+    saveFavs();
+  }
+
   // Fascia: come ordinare quando si è seduti al tavolo — 3 passi con icone.
   function dineBand(ui) {
     var steps = (ui.dineSteps || []).map(function (s, i) {
       return '<div class="dine-step"><span class="dine-ic">' + (DINE_ICONS[i] || "") + '</span>' +
         '<p><b>' + esc(s[0]) + '</b><span>' + esc(s[1]) + '</span></p></div>';
     }).join("");
-    return '<div class="dine-note"><div class="dine-note__in">' +
+    var badge = tableNo
+      ? '<div class="dine-table"><span class="dine-table__ic" aria-hidden="true">🍽️</span>' +
+        '<span class="dine-table__txt">' + esc(ui.tableLabel) + ' <b>' + esc(tableNo) + '</b></span></div>'
+      : "";
+    return '<div class="dine-note"><div class="dine-note__in">' + badge +
       '<span class="dine-note__kicker">' + esc(ui.dineTitle) + '</span>' +
       '<div class="dine-steps">' + steps + '</div></div></div>';
   }
@@ -423,12 +466,19 @@
   }
 
   function dish(item, lang, names) {
+    var descTxt = item.d ? desc(item.n, item.d, lang) : "";
+    var tags = deriveTags(item);
+    var fav = isFav(item.n);
+    var heart = '<button type="button" class="dish-fav' + (fav ? " is-fav" : "") +
+      '" data-fav="' + esc(item.n) + '" aria-pressed="' + fav + '" aria-label="' + esc(item.n) + '">' + HEART_SVG + '</button>';
     var head =
       '<div class="dish-head"><h3 class="dish-name">' + esc(item.n) +
       (item.fresh ? FRESH_SVG : "") + allerg(item.a, names) + '</h3>' +
-      '<span class="price">' + esc(item.p) + '</span></div>';
-    var body = item.d ? '<p class="desc">' + esc(desc(item.n, item.d, lang)) + '</p>' : "";
-    return '<article class="dish">' + head + body + '</article>';
+      '<span class="dish-head__r"><span class="price">' + esc(item.p) + '</span>' + heart + '</span></div>';
+    var body = descTxt ? '<p class="desc">' + esc(descTxt) + '</p>' : "";
+    var search = (item.n + " " + descTxt).toLowerCase();
+    return '<article class="dish" data-name="' + esc(item.n) + '" data-search="' + esc(search) +
+      '" data-veg="' + tags.veg + '" data-spicy="' + tags.spicy + '">' + head + body + '</article>';
   }
 
   function section(s, tone, lang, ui, names) {
@@ -446,7 +496,8 @@
   }
 
   function drinkLi(b, lang, names) {
-    return '<li><span class="drink-name">' + esc(desc(b.n, b.n, lang)) + allerg(b.a, names) +
+    var nm = desc(b.n, b.n, lang);
+    return '<li data-search="' + esc(nm.toLowerCase()) + '"><span class="drink-name">' + esc(nm) + allerg(b.a, names) +
       '</span><span class="dotfill"></span><span class="price">' + esc(b.p) + '</span></li>';
   }
 
@@ -454,7 +505,8 @@
     var beerTitle = I18N.birreTitolo[lang] || data.birre.titolo;
     var beerStdTitle = (I18N.birreStdTitolo && I18N.birreStdTitolo[lang]) || data.birreStd.titolo;
     var bibite = data.bibite.map(function (b) {
-      return '<li><span class="drink-name">' + esc(desc(b.n, b.n, lang)) +
+      var nm = desc(b.n, b.n, lang);
+      return '<li data-search="' + esc(nm.toLowerCase()) + '"><span class="drink-name">' + esc(nm) +
         '</span><span class="dotfill"></span><span class="price">' + esc(b.p) + '</span></li>';
     }).join("");
     var std = data.birreStd.items.map(function (b) { return drinkLi(b, lang, names); }).join("");
@@ -467,6 +519,30 @@
       '<ul class="drink-list">' + std + '</ul>' +
       '<h3 class="beer-title beer-title--craft">' + esc(beerTitle) + '</h3>' +
       '<ul class="drink-list">' + craft + '</ul></div></div></div></section>';
+  }
+
+  // Barra ricerca + filtri rapidi (vegetariane / piccanti / preferiti).
+  function filterBar(ui) {
+    var f = ui.filter;
+    var chip = function (id, label) {
+      return '<button type="button" class="gfilter-chip' + (currentChip === id ? " gfilter-chip--active" : "") +
+        '" data-chip="' + id + '">' + label + '</button>';
+    };
+    var favHidden = (favSet.length === 0 && currentChip !== "fav") ? " hidden" : "";
+    var favChip = '<button type="button" class="gfilter-chip gfilter-fav' + (currentChip === "fav" ? " gfilter-chip--active" : "") +
+      '" data-chip="fav"' + favHidden + '><span class="gfilter-heart">♥</span> ' + esc(f.fav) +
+      ' <span class="gfilter-count">' + favSet.length + '</span></button>';
+    return '<div class="gfilter"><div class="gfilter__in">' +
+      '<div class="gfilter__search">' + SEARCH_SVG +
+      '<input type="search" class="gfilter__input" placeholder="' + esc(f.placeholder) + '" aria-label="' + esc(f.placeholder) + '" value="' + esc(currentQuery) + '">' +
+      '<button type="button" class="gfilter__clear" aria-label="' + esc(f.clear) + '"' + (currentQuery ? "" : " hidden") + '>×</button>' +
+      '</div>' +
+      '<div class="gfilter__chips">' +
+      chip("all", esc(f.all)) +
+      chip("veg", "🌱 " + esc(f.veg)) +
+      chip("spicy", "🌶️ " + esc(f.spicy)) +
+      favChip +
+      '</div></div></div>';
   }
 
   function hero(variant, ui) {
@@ -548,7 +624,7 @@
   }
 
   /* ----------------------------- STATO + RENDER --------------------------- */
-  var root, currentLang;
+  var root, currentLang, tableNo = "", currentQuery = "", currentChip = "all";
 
   function readLang() {
     try {
@@ -577,8 +653,10 @@
       dineBand(ui) +
       '<div class="block allerg-top" data-tone="white"><div class="block__inner"><p>' +
       esc(ui.allergTop) + ' <a href="#note" class="allerg-more">' + esc(ui.allergMore) + '</a></p></div></div>' +
+      filterBar(ui) +
       sections +
       drinks(MENU.bibite, drinksTone, currentLang, ui, names) +
+      '<div class="gfilter-empty is-hidden" data-tone="white"><div class="block__inner"><p>' + esc(ui.filter.none) + '</p></div></div>' +
       noteBox(ui, names) +
       footer(ui) +
       '</div>' +
@@ -588,6 +666,8 @@
     wireAllergens();
     wireFnav();
     wireOrder();
+    wireFilter();
+    wireFavs();
   }
 
   // Finestra "Ordina": apertura dai pulsanti .order-trigger, chiusura da backdrop/×/scelta.
@@ -602,6 +682,114 @@
     var bd = modal.querySelector(".ord-backdrop"); if (bd) bd.addEventListener("click", close);
     var x = modal.querySelector(".ord-close"); if (x) x.addEventListener("click", close);
     modal.querySelectorAll(".ord-opt").forEach(function (a) { a.addEventListener("click", close); });
+  }
+
+  /* --------------------- RICERCA + FILTRI + PREFERITI --------------------- */
+  var PIZZA_IDS = ["classiche", "speciali", "margherita", "pala"];
+
+  function updateFavChip() {
+    var chip = root.querySelector(".gfilter-fav");
+    if (!chip) return;
+    var cnt = chip.querySelector(".gfilter-count");
+    if (cnt) cnt.textContent = favSet.length;
+    chip.hidden = (favSet.length === 0 && currentChip !== "fav");
+  }
+
+  // Applica ricerca testuale + chip attivo a piatti, bevande e sezioni.
+  function applyFilter() {
+    if (!root) return;
+    var q = currentQuery.trim().toLowerCase();
+    var chip = currentChip;
+    var foodChip = (chip === "veg" || chip === "spicy" || chip === "fav");
+    var active = q !== "" || chip !== "all";
+    var anyVisible = false;
+
+    root.querySelectorAll(".dish").forEach(function (d) {
+      var ok = true;
+      if (q) ok = (d.getAttribute("data-search") || "").indexOf(q) !== -1;
+      if (ok && chip === "veg") ok = d.getAttribute("data-veg") === "true";
+      else if (ok && chip === "spicy") ok = d.getAttribute("data-spicy") === "true";
+      else if (ok && chip === "fav") ok = isFav(d.getAttribute("data-name"));
+      d.classList.toggle("is-hidden", !ok);
+      if (ok) anyVisible = true;
+    });
+
+    root.querySelectorAll("#bibite .drink-list li").forEach(function (li) {
+      var ok = !foodChip;
+      if (ok && q) ok = (li.getAttribute("data-search") || "").indexOf(q) !== -1;
+      li.classList.toggle("is-hidden", !ok);
+      if (ok) anyVisible = true;
+    });
+
+    root.querySelectorAll(".block[id]").forEach(function (sec) {
+      var id = sec.id;
+      if (PIZZA_IDS.indexOf(id) !== -1) {
+        var vis = sec.querySelectorAll(".dish:not(.is-hidden)").length;
+        sec.classList.toggle("is-hidden", active && vis === 0);
+      } else if (id === "bibite") {
+        var visd = sec.querySelectorAll(".drink-list li:not(.is-hidden)").length;
+        sec.classList.toggle("is-hidden", active && visd === 0);
+      }
+    });
+
+    // In modalità ricerca/filtro nascondi le fasce lunghe per dare risalto ai risultati.
+    var aux = root.querySelector(".allerg-top");
+    if (aux) aux.classList.toggle("is-hidden", active);
+    var note = root.querySelector(".note-box");
+    if (note) note.classList.toggle("is-hidden", active);
+
+    var es = root.querySelector(".gfilter-empty");
+    if (es) es.classList.toggle("is-hidden", !(active && !anyVisible));
+
+    updateFavChip();
+  }
+
+  function wireFilter() {
+    var bar = root.querySelector(".gfilter");
+    if (!bar) return;
+    var input = bar.querySelector(".gfilter__input");
+    var clear = bar.querySelector(".gfilter__clear");
+    if (input) {
+      input.addEventListener("input", function () {
+        currentQuery = input.value;
+        if (clear) clear.hidden = !currentQuery;
+        applyFilter();
+      });
+    }
+    if (clear) {
+      clear.addEventListener("click", function () {
+        currentQuery = "";
+        if (input) { input.value = ""; input.focus(); }
+        clear.hidden = true;
+        applyFilter();
+      });
+    }
+    bar.querySelectorAll(".gfilter-chip").forEach(function (c) {
+      c.addEventListener("click", function () {
+        var id = c.getAttribute("data-chip");
+        currentChip = (currentChip === id && id !== "all") ? "all" : id;
+        bar.querySelectorAll(".gfilter-chip").forEach(function (x) {
+          x.classList.toggle("gfilter-chip--active", x.getAttribute("data-chip") === currentChip);
+        });
+        applyFilter();
+      });
+    });
+    applyFilter();
+  }
+
+  function wireFavs() {
+    root.querySelectorAll(".dish-fav").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.preventDefault();
+        var n = b.getAttribute("data-fav");
+        toggleFav(n);
+        var on = isFav(n);
+        b.classList.toggle("is-fav", on);
+        b.setAttribute("aria-pressed", on);
+        updateFavChip();
+        if (currentChip === "fav") applyFilter();
+      });
+    });
   }
 
   /* --------------------------- INTERAZIONI -------------------------------- */
@@ -736,6 +924,14 @@
     if (d.legal) CONFIG.legalInfo = d.legal;
     if (d.privacyUrl) CONFIG.privacyUrl = d.privacyUrl;
     root.classList.add("goffee-menu");
+    // Numero del tavolo dal QR (?t=5). In sessione (sessionStorage) così sopravvive
+    // alla navigazione interna ma non resta "appiccicato" fra visite diverse.
+    try {
+      var tq = new URLSearchParams(location.search).get("t");
+      if (tq) { tableNo = tq.replace(/[^0-9A-Za-z]/g, "").slice(0, 4); sessionStorage.setItem("goffee-table", tableNo); }
+      else { tableNo = sessionStorage.getItem("goffee-table") || ""; }
+    } catch (e) {}
+    favSet = readFavs();
     currentLang = readLang();
     document.documentElement.lang = currentLang;
     render();        // mostra subito i dati interni (nessuna attesa / nessun vuoto)

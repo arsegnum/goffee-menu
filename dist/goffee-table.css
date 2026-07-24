@@ -109,6 +109,13 @@
 .goffee-table .gt-eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:14px;}
 .goffee-table .gt-h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.9rem,13vw,4.3rem);line-height:.98;letter-spacing:-.02em;margin:0 0 clamp(24px,6vw,34px);color:var(--ink);}
 
+/* --- badge numero tavolo (dal QR ?t=) --- */
+.goffee-table .gt-table{display:inline-flex;align-items:center;gap:8px;margin:-6px 0 clamp(22px,5vw,30px);
+  padding:8px 18px;border-radius:980px;background:var(--accent);color:#fff;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 10px 24px -12px color-mix(in srgb,var(--accent) 70%,#000);}
+.goffee-table .gt-table b{font-family:var(--serif);font-size:1.15rem;font-weight:600;letter-spacing:0;text-transform:none;}
+
 /* --- etichetta "scegli lingua" --- */
 .goffee-table .gt-choose-label{display:flex;align-items:center;gap:14px;margin:0 0 8px;
   color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;}

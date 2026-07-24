@@ -9,7 +9,7 @@
   var CONFIG = {
     mount: "#goffee-table-root",
     menuUrl: "/menu",                 // pagina del menù (override: data-menu-url)
-    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v26/dist/goffee-logo.png",
+    logoSrc: "https://cdn.jsdelivr.net/gh/arsegnum/goffee-menu@v30/dist/goffee-logo.png",
     storageKey: "goffee-lang"         // stessa chiave del menù → la lingua si mantiene
   };
 
@@ -23,8 +23,11 @@
   var T = {
     place: "Dervio · Lago di Como",
     welcome: "Benvenuto",
-    langPick: "Lingua · Language · Sprache · Langue"
+    langPick: "Lingua · Language · Sprache · Langue",
+    table: "Tavolo"
   };
+
+  var tableNo = "";
 
   var CHEVRON =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -42,11 +45,13 @@
         '<span class="gt-lang-name">' + esc(l[1]) + '</span>' +
         '<span class="gt-chevron">' + CHEVRON + '</span></button>';
     }).join("");
+    var tableBadge = tableNo ? '<div class="gt-table">' + esc(T.table) + ' <b>' + esc(tableNo) + '</b></div>' : "";
     root.innerHTML =
       '<div class="gt-wrap">' +
       '<img class="gt-logo" src="' + esc(CONFIG.logoSrc) + '" alt="Goffee Pizzeria">' +
       '<div class="gt-eyebrow">' + esc(T.place) + '</div>' +
       '<h1 class="gt-h1">' + esc(T.welcome) + '</h1>' +
+      tableBadge +
       '<div class="gt-choose-label">' + esc(T.langPick) + '</div>' +
       '<div class="gt-langs" role="group" aria-label="Lingua / Language">' + buttons + '</div>' +
       '</div>';
@@ -55,17 +60,23 @@
     });
   }
 
-  // Salva la lingua (che il menù riuserà) e apre il menù.
+  // Salva la lingua (che il menù riuserà) e apre il menù, inoltrando il tavolo (?t=).
   function pick(code) {
     try { localStorage.setItem(CONFIG.storageKey, code); } catch (e) {}
     try { document.documentElement.lang = code; } catch (e) {}
-    window.location.href = CONFIG.menuUrl;
+    var url = CONFIG.menuUrl;
+    if (tableNo) url += (url.indexOf("?") === -1 ? "?" : "&") + "t=" + encodeURIComponent(tableNo);
+    window.location.href = url;
   }
 
   function init() {
     root = document.querySelector(CONFIG.mount);
     if (!root) { console.error("[Goffee Tavolo] contenitore non trovato:", CONFIG.mount); return; }
     if (root.dataset && root.dataset.menuUrl) CONFIG.menuUrl = root.dataset.menuUrl;
+    try {
+      var tq = new URLSearchParams(location.search).get("t");
+      if (tq) tableNo = tq.replace(/[^0-9A-Za-z]/g, "").slice(0, 4);
+    } catch (e) {}
     root.classList.add("goffee-table");
     render();
   }
