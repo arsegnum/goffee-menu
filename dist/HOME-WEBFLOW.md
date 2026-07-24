@@ -40,4 +40,3 @@ sono nell'array `TEASER` nello stesso file. Dopo una modifica: commit/push + nuo
   foto pizza che fluttua, animazioni di comparsa, menù responsive.
 - Lo stile è isolato sotto `.goffee-home`, quindi non interferisce col resto del sito.
 - Anteprima locale: apri `goffee-home.html` con doppio clic.
-</content>

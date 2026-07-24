@@ -83,4 +83,3 @@ sito. Ultimo aggiornamento: **[DATA]**.
 - [ ] Verificare in Webflow se ci sono **analytics/cookie**; se sì, valutare un **banner consenso**.
 - [ ] Far **validare** il testo (consulente o strumento tipo iubenda) prima di pubblicare.
 - [ ] Mettere un **link "Privacy"** nel footer.
-</content>

@@ -46,4 +46,3 @@ I numeri allergeni: 1 Arachidi · 2 Frutta a guscio · 3 Latte · 4 Molluschi ·
 - Cambi una pizza/prezzo nel foglio → salvi → il sito si aggiorna (la cache di Google può
   metterci qualche minuto).
 - Lo snippet in Webflow **non si tocca mai più**.
-</content>

@@ -119,4 +119,3 @@ vuoi che prepari le classi/struttura per questa strada.
   sfondo cambia `CONFIG.hero` in `"sfondo"` e imposta `CONFIG.heroBg` con l'URL di
   `hero-pizza.jpg`.
 - **Allergeni:** numeri accanto al piatto; passaci sopra (o tocca su mobile) per la legenda.
-</content>
