@@ -37,6 +37,9 @@
     facebook: "#",
     // Ordinazione online: pagina di ordinazione (GloriaFood/Foodbooking)
     orderUrl: "https://www.foodbooking.com/api/fb/_q_jn_z_v",
+    // Link recensione Google. Default: apre la scheda dell'attività (nome+paese).
+    // Metti il link diretto "scrivi recensione" con data-review-url="…" sullo snippet.
+    reviewUrl: "https://www.google.com/maps/search/?api=1&query=Goffee%20Pizzeria%20Dervio",
     glfLabel: "Vedi Menu & Ordina",
     glfNavLabel: "Ordina ora"
   };
@@ -164,6 +167,7 @@
         allergMore: "Maggiori informazioni",
         tableLabel: "Sei al tavolo",
         filter: { placeholder: "Cerca una pizza…", all: "Tutte", veg: "Vegetariane", spicy: "Piccanti", fav: "Preferiti", none: "Nessun risultato. Prova con un'altra ricerca.", clear: "Cancella" },
+        reviewTitle: "Ti è piaciuto?", reviewSub: "Lasciaci una recensione su Google: per noi conta moltissimo.", reviewCta: "Lascia una recensione",
       dineTitle: "Come funziona il servizio al tavolo",
       dineSteps: [["Ordina alla cassa", "con nome e numero del tavolo"], ["Alle pizze ci pensiamo noi", "te le portiamo al tavolo"], ["Le bevande", "le ritiri al banco"]],
         freshNote: "Alcuni ingredienti freschi sono serviti a parte, da aggiungere a casa per gustarli al meglio.",
@@ -188,6 +192,7 @@
         allergMore: "More information",
         tableLabel: "You're at table",
         filter: { placeholder: "Search a pizza…", all: "All", veg: "Vegetarian", spicy: "Spicy", fav: "Favourites", none: "No results. Try another search.", clear: "Clear" },
+        reviewTitle: "Did you enjoy it?", reviewSub: "Leave us a review on Google — it means a lot to us.", reviewCta: "Leave a review",
       dineTitle: "How table service works",
       dineSteps: [["Order at the counter", "with your name and table number"], ["Leave the pizzas to us", "we bring them to your table"], ["Drinks", "collect them at the counter"]],
         freshNote: "Some fresh ingredients are served separately, to add at home so you enjoy them at their best.",
@@ -212,6 +217,7 @@
         allergMore: "Mehr Informationen",
         tableLabel: "Du sitzt an Tisch",
         filter: { placeholder: "Pizza suchen…", all: "Alle", veg: "Vegetarisch", spicy: "Scharf", fav: "Favoriten", none: "Keine Ergebnisse. Versuch eine andere Suche.", clear: "Löschen" },
+        reviewTitle: "Hat es geschmeckt?", reviewSub: "Bewerte uns auf Google — das bedeutet uns sehr viel.", reviewCta: "Bewertung schreiben",
       dineTitle: "So funktioniert der Tischservice",
       dineSteps: [["An der Kasse bestellen", "mit Name und Tischnummer"], ["Um die Pizzen kümmern wir uns", "wir bringen sie an den Tisch"], ["Getränke", "an der Theke abholen"]],
         freshNote: "Einige frische Zutaten werden separat serviert, um sie zu Hause hinzuzufügen und in bester Qualität zu genießen.",
@@ -236,6 +242,7 @@
         allergMore: "Plus d'informations",
         tableLabel: "Vous êtes à la table",
         filter: { placeholder: "Rechercher une pizza…", all: "Toutes", veg: "Végétariennes", spicy: "Épicées", fav: "Favoris", none: "Aucun résultat. Essayez une autre recherche.", clear: "Effacer" },
+        reviewTitle: "Vous avez aimé ?", reviewSub: "Laissez-nous un avis sur Google — ça compte énormément pour nous.", reviewCta: "Laisser un avis",
       dineTitle: "Comment fonctionne le service à table",
       dineSteps: [["Commandez à la caisse", "avec nom et numéro de table"], ["Les pizzas, on s'en occupe", "on vous les apporte à table"], ["Boissons", "à récupérer au comptoir"]],
         freshNote: "Certains ingrédients frais sont servis à part, à ajouter à la maison pour les savourer au mieux.",
@@ -357,6 +364,10 @@
     '<svg class="gfilter__ic" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   var HEART_SVG =
     '<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 12.9a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9a4.6 4.6 0 1 1 6.5 6.5L12 20.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  var GOOGLE_G_SVG =
+    '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.7-.4-3.9H24v7.1h12.1c-.2 1.8-1.6 4.6-4.5 6.4l6.9 5.4c4.1-3.8 6.6-9.4 6.6-15z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.3 2.2-7.6 2.2-5.8 0-10.8-3.9-12.5-9.3l-7.1 5.5C8 40.3 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.2c-.5-1.3-.7-2.7-.7-4.2s.3-2.9.7-4.2l-7.1-5.5C2.9 17.1 2 20.4 2 24s.9 6.9 2.4 9.7l7.1-5.5z"/><path fill="#EA4335" d="M24 10.5c3.3 0 5.5 1.4 6.7 2.6l5.9-5.8C33 3.9 28.8 2 24 2 15.4 2 8 7.7 4.4 15.3l7.1 5.5c1.7-5.4 6.7-10.3 12.5-10.3z"/></svg>';
+  var STAR_SVG =
+    '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 18l-5.9 3.1 1.3-6.6L2.5 9.4l6.6-.8L12 2.5z" fill="#F5A623"/></svg>';
 
   // Riconoscimento tag (vegetariana / piccante) da nome+ingredienti in italiano.
   // Override espliciti possibili dal Foglio Google: colonne veg / piccante (true/false).
@@ -603,6 +614,18 @@
       '</div></section>';
   }
 
+  // Fascia recensione Google (discreta, in fondo al menù).
+  function reviewBand(ui) {
+    var stars = new Array(5).fill(STAR_SVG).join("");
+    return '<section class="block review-band" data-tone="white" id="recensione"><div class="block__inner">' +
+      '<div class="rev-stars" aria-hidden="true">' + stars + '</div>' +
+      '<p class="rev-title">' + esc(ui.reviewTitle) + '</p>' +
+      '<p class="rev-sub">' + esc(ui.reviewSub) + '</p>' +
+      '<a class="btn btn--ghost rev-btn" href="' + esc(CONFIG.reviewUrl) + '" target="_blank" rel="noopener">' +
+      GOOGLE_G_SVG + '<span>' + esc(ui.reviewCta) + '</span></a>' +
+      '</div></section>';
+  }
+
   function footer(ui) {
     return '<footer class="block foot" data-tone="ice" id="contatti"><div class="block__inner">' +
       '<span class="foot-eyebrow">' + esc(ui.footEyebrow) + '</span>' +
@@ -658,6 +681,7 @@
       drinks(MENU.bibite, drinksTone, currentLang, ui, names) +
       '<div class="gfilter-empty is-hidden" data-tone="white"><div class="block__inner"><p>' + esc(ui.filter.none) + '</p></div></div>' +
       noteBox(ui, names) +
+      reviewBand(ui) +
       footer(ui) +
       '</div>' +
       fnav(currentLang) +
@@ -917,6 +941,7 @@
     var d = root.dataset || {};
     if (d.homeUrl) CONFIG.homeUrl = d.homeUrl;
     if (d.orderUrl) CONFIG.orderUrl = d.orderUrl;
+    if (d.reviewUrl) CONFIG.reviewUrl = d.reviewUrl;
     if (d.tel) CONFIG.tel = d.tel;
     if (d.lunch) CONFIG.hours.lunch = d.lunch;
     if (d.dinner) CONFIG.hours.dinner = d.dinner;

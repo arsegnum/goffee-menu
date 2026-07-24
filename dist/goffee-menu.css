@@ -330,3 +330,13 @@
 /* ---------- NESSUN RISULTATO ---------- */
 .goffee-menu .gfilter-empty .block__inner{padding-top:clamp(48px,8vw,80px);padding-bottom:clamp(48px,8vw,80px);text-align:center;}
 .goffee-menu .gfilter-empty p{margin:0;color:var(--muted);font-size:1.05rem;}
+
+/* ---------- FASCIA RECENSIONE GOOGLE ---------- */
+.goffee-menu .review-band{background:color-mix(in srgb,var(--accent) 4%, var(--white));}
+.goffee-menu .review-band .block__inner{text-align:center;padding-top:clamp(44px,6vw,68px);padding-bottom:clamp(44px,6vw,68px);border-top:1px solid var(--line);}
+.goffee-menu .rev-stars{display:flex;justify-content:center;gap:4px;margin-bottom:16px;}
+.goffee-menu .rev-stars svg{display:block;}
+.goffee-menu .rev-title{margin:0 0 7px;font-size:clamp(1.35rem,3.2vw,1.8rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);}
+.goffee-menu .rev-sub{margin:0 auto 22px;max-width:44ch;color:var(--muted);font-size:1rem;line-height:1.5;letter-spacing:-.01em;text-wrap:pretty;}
+.goffee-menu .rev-btn{gap:10px;background:var(--white);}
+.goffee-menu .rev-btn svg{display:block;}
